@@ -183,11 +183,11 @@ const EnergyAgendaScreen = () => {
   const currentHour = currentTime.getHours()
 
   return (
-    <div className="bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
       <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-400 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
 
-      <div className="z-10 relative p-4">
+      <div className="z-10 relative p-4 w-full max-w-[800px]">
         {/* Header */}
         <div className="flex justify-between items-center mb-6 text-xs">
           <div className="text-green-500">ENERGYLANE v1.0</div>
@@ -220,27 +220,22 @@ const EnergyAgendaScreen = () => {
         </div>
 
         {/* Current Energy Status */}
-        <div className="mx-auto mb-8 max-w-6xl">
-          <div className="bg-green-900 bg-opacity-20 p-3 border border-green-600 text-center">
-            <div className="mb-2 text-green-300">
-              RIGHT NOW: {currentMood.emoji} {currentMood.label} •{' '}
-              {getEnergyBar(currentMood.energy)} ({currentMood.energy}/10)
+        <div className="mx-auto mb-8 max-w-4xl">
+          <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600 text-center">
+            <div className="mb-2 text-green-300 text-lg">
+              CURRENT ENERGY: {currentMood.emoji} {currentMood.label}
             </div>
-            <div className="text-green-500 text-xs">
-              CURRENT HOUR ENERGY:{' '}
-              {getEnergyLevel(
-                energyPattern[
-                  `${currentHour.toString().padStart(2, '0')}:00`
-                ] || 5,
-              )}
+            <div className="text-green-400">
+              LEVEL: {getEnergyBar(currentMood.energy)} ({currentMood.energy}
+              /10)
             </div>
           </div>
         </div>
 
-        {/* Daily Schedule */}
+        {/* Main Sections: Energy Timeline & Scheduled Tasks */}
         <div className="mx-auto mb-8 max-w-6xl">
           <div className="gap-8 grid grid-cols-1 lg:grid-cols-2">
-            {/* Time Blocks */}
+            {/* Energy Timeline */}
             <div>
               <div className="mb-4 text-center">
                 <div className="text-green-300 text-base">
@@ -253,21 +248,15 @@ const EnergyAgendaScreen = () => {
                   └─────────────────────────────────────┘
                 </div>
               </div>
-
               <div className="space-y-1">
                 {timeSlots.map((time) => {
                   const energy = energyPattern[time]
                   const isCurrentHour =
                     parseInt(time.split(':')[0]) === currentHour
-
                   return (
                     <div
                       key={time}
-                      className={`flex items-center p-2 border ${
-                        isCurrentHour
-                          ? 'border-green-300 bg-green-900 bg-opacity-40'
-                          : 'border-green-600'
-                      } ${getEnergyColor(energy)}`}
+                      className={`flex items-center p-2 border ${isCurrentHour ? 'border-green-300 bg-green-900 bg-opacity-40' : 'border-green-600'} ${getEnergyColor(energy)}`}
                     >
                       <div className="mr-4 w-12 text-right">{time}</div>
                       <div className="flex-1">
@@ -290,7 +279,6 @@ const EnergyAgendaScreen = () => {
                 })}
               </div>
             </div>
-
             {/* Scheduled Tasks */}
             <div>
               <div className="mb-4 text-center">
@@ -304,7 +292,6 @@ const EnergyAgendaScreen = () => {
                   └─────────────────────────────────────┘
                 </div>
               </div>
-
               <div className="space-y-3">
                 {scheduledTasks.map((task, index) => {
                   const taskHour = parseInt(task.time.split(':')[0])
@@ -317,15 +304,10 @@ const EnergyAgendaScreen = () => {
                     Math.abs(task.energy - energyAtTime) <= 1
                       ? 'OPTIMAL'
                       : 'MODERATE'
-
                   return (
                     <div
                       key={index}
-                      className={`p-3 border ${
-                        isCurrentTask
-                          ? 'border-green-300 bg-green-900 bg-opacity-40'
-                          : 'border-green-600'
-                      } ${getTaskColor(task)}`}
+                      className={`p-3 border ${isCurrentTask ? 'border-green-300 bg-green-900 bg-opacity-40' : 'border-green-600'} ${getTaskColor(task)}`}
                     >
                       <div className="flex justify-between items-center mb-2">
                         <div className="flex items-center">
@@ -370,7 +352,6 @@ const EnergyAgendaScreen = () => {
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
-
           <div className="gap-4 grid grid-cols-1 md:grid-cols-3 text-center">
             <div className="p-3 border border-green-600">
               <div className="mb-1 text-green-300 text-sm">PEAK HOURS</div>
@@ -399,14 +380,12 @@ const EnergyAgendaScreen = () => {
             >
               [ESC] BACK
             </button>
-
             <button
               onClick={() => console.log('Reschedule tasks')}
               className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-500 text-green-400 transition-colors duration-200"
             >
               [R] RESCHEDULE
             </button>
-
             <button
               onClick={() => console.log('Navigate to insights')}
               className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-300 text-green-300 transition-colors duration-200"
@@ -424,7 +403,7 @@ const EnergyAgendaScreen = () => {
           <div>└─────────────────────────────────────────────────────────┘</div>
         </div>
 
-        {/* Status Line */}
+        {/* Blinking cursor */}
         <div className="text-center">
           <span className="text-green-400">
             AGENDA OPTIMIZED FOR ENERGY PATTERNS{blinkingCursor ? '█' : ' '}

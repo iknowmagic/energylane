@@ -1,0 +1,456 @@
+import { useEffect, useState } from 'react'
+
+// Exported interfaces for type safety
+export interface WeeklyData {
+  days: string[]
+  energyLevels: number[]
+  lowEnergyTasks: number[]
+  highEnergyTasks: number[]
+  totalLowTasks: number[]
+  totalHighTasks: number[]
+}
+
+export interface ReflectionAnswers {
+  blockers: string
+  change: string
+}
+
+export type FormatTimeFn = (date: Date) => string
+export type GetEnergyBarFn = (energy: number) => string
+export type GetCompletionBarFn = (completed: number, total: number) => string
+export type HandleReflectionChangeFn = (field: string, value: string) => void
+
+const WeeklyInsightsScreen = () => {
+  const [currentTime, setCurrentTime] = useState(new Date())
+  const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const [currentWeek] = useState('AUG 11-17, 2025')
+  const [reflectionAnswers, setReflectionAnswers] = useState({
+    blockers: '',
+    change: '',
+  })
+
+  // Weekly data (mock data for demonstration)
+  const weeklyData = {
+    days: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+    energyLevels: [7, 8, 6, 9, 8, 5, 4], // Average energy per day
+    lowEnergyTasks: [3, 4, 2, 5, 4, 6, 3], // Completed low-energy tasks
+    highEnergyTasks: [2, 3, 1, 4, 3, 1, 0], // Completed high-energy tasks
+    totalLowTasks: [4, 5, 3, 6, 5, 7, 4], // Total low-energy tasks
+    totalHighTasks: [4, 4, 3, 5, 4, 3, 2], // Total high-energy tasks
+  }
+
+  // Calculate completion rates
+  const lowEnergyCompletion = Math.round(
+    (weeklyData.lowEnergyTasks.reduce((a, b) => a + b, 0) /
+      weeklyData.totalLowTasks.reduce((a, b) => a + b, 0)) *
+      100,
+  )
+
+  const highEnergyCompletion = Math.round(
+    (weeklyData.highEnergyTasks.reduce((a, b) => a + b, 0) /
+      weeklyData.totalHighTasks.reduce((a, b) => a + b, 0)) *
+      100,
+  )
+
+  const insights = [
+    'Your peak energy days (THU, FRI) had 75% high-energy task completion',
+    'Low energy weekend matches reduced task load - good self-awareness!',
+    'Wednesday dip coincided with only 33% high-energy completion',
+    'Best momentum: Tuesday-Thursday with consistent 7+ energy levels',
+  ]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+
+    const blinkTimer = setInterval(() => {
+      setBlinkingCursor((prev) => !prev)
+    }, 800)
+
+    return () => {
+      clearInterval(timer)
+      clearInterval(blinkTimer)
+    }
+  }, [])
+
+  const formatTime: FormatTimeFn = (date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    })
+  }
+
+  const getEnergyBar: GetEnergyBarFn = (energy) => {
+    const bars = Math.floor(energy / 2)
+    return '█'.repeat(bars) + '░'.repeat(5 - bars)
+  }
+
+  const getCompletionBar: GetCompletionBarFn = (completed, total) => {
+    if (total === 0) return '░░░░░░░░'
+    const percentage = completed / total
+    const bars = Math.floor(percentage * 8)
+    return '█'.repeat(bars) + '░'.repeat(8 - bars)
+  }
+
+  const handleReflectionChange: HandleReflectionChangeFn = (field, value) => {
+    setReflectionAnswers((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
+  }
+
+  return (
+    <div className="bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+      {/* Scanlines effect */}
+      <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-400 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
+
+      <div className="z-10 relative p-4">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6 text-xs">
+          <div className="text-green-500">ENERGYLANE v1.0</div>
+          <div className="text-green-500">TIME: {formatTime(currentTime)}</div>
+          <div className="text-green-500">USER: ILAN_KAIM</div>
+        </div>
+
+        <div className="mb-8 text-center">
+          <div className="mb-4 text-green-300">
+            ════════════════════════════════════════════════════════════════
+          </div>
+          <div className="mb-2 text-green-300 text-xl tracking-wider">
+            ╔══════════════════════════════════════════════════════════╗
+          </div>
+          <div className="mb-2 text-green-300 text-xl tracking-wider">
+            ║ WEEKLY REFLECTION & INSIGHTS ║
+          </div>
+          <div className="mb-4 text-green-300 text-xl tracking-wider">
+            ╚══════════════════════════════════════════════════════════╝
+          </div>
+          <div className="mb-2 text-green-500 text-sm">
+            WEEK OF {currentWeek}
+          </div>
+          <div className="mb-4 text-green-500 text-xs">
+            ANALYZE PATTERNS • IDENTIFY IMPROVEMENTS • PLAN AHEAD
+          </div>
+          <div className="text-green-300">
+            ════════════════════════════════════════════════════════════════
+          </div>
+        </div>
+
+        {/* Weekly Overview Stats */}
+        <div className="mx-auto mb-8 max-w-6xl">
+          <div className="gap-4 grid grid-cols-1 md:grid-cols-4 text-center">
+            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
+              <div className="mb-2 text-green-300 text-lg">
+                {lowEnergyCompletion}%
+              </div>
+              <div className="text-green-500 text-xs">LOW-ENERGY TASKS</div>
+              <div className="mt-1 text-green-600 text-xs">27/34 completed</div>
+            </div>
+            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
+              <div className="mb-2 text-green-300 text-lg">
+                {highEnergyCompletion}%
+              </div>
+              <div className="text-green-500 text-xs">HIGH-ENERGY TASKS</div>
+              <div className="mt-1 text-green-600 text-xs">14/25 completed</div>
+            </div>
+            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
+              <div className="mb-2 text-green-300 text-lg">6.7</div>
+              <div className="text-green-500 text-xs">AVG ENERGY LEVEL</div>
+              <div className="mt-1 text-green-600 text-xs">
+                Good week overall
+              </div>
+            </div>
+            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
+              <div className="mb-2 text-green-300 text-lg">4</div>
+              <div className="text-green-500 text-xs">PEAK ENERGY DAYS</div>
+              <div className="mt-1 text-green-600 text-xs">
+                Thu-Fri strongest
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Weekly Charts */}
+        <div className="mx-auto mb-8 max-w-6xl">
+          <div className="gap-8 grid grid-cols-1 lg:grid-cols-2">
+            {/* Energy Levels Chart */}
+            <div>
+              <div className="mb-4 text-center">
+                <div className="text-green-300 text-base">
+                  ┌─────────────────────────────────────┐
+                </div>
+                <div className="text-green-300 text-base">
+                  │ DAILY ENERGY LEVELS │
+                </div>
+                <div className="text-green-300 text-base">
+                  └─────────────────────────────────────┘
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                {weeklyData.days.map((day, index) => (
+                  <div
+                    key={day}
+                    className="flex items-center p-2 border border-green-600"
+                  >
+                    <div className="mr-4 w-8 text-green-300 text-center">
+                      {day}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center">
+                        <div className="mr-3 w-20">
+                          {getEnergyBar(weeklyData.energyLevels[index])}
+                        </div>
+                        <div className="text-green-400 text-xs">
+                          {weeklyData.energyLevels[index]}/10
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Task Completion Chart */}
+            <div>
+              <div className="mb-4 text-center">
+                <div className="text-green-300 text-base">
+                  ┌─────────────────────────────────────┐
+                </div>
+                <div className="text-green-300 text-base">
+                  │ TASK COMPLETION RATES │
+                </div>
+                <div className="text-green-300 text-base">
+                  └─────────────────────────────────────┘
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {weeklyData.days.map((day, index) => (
+                  <div key={day} className="p-2 border border-green-600">
+                    <div className="flex justify-between items-center mb-2">
+                      <div className="font-bold text-green-300">{day}</div>
+                      <div className="text-green-600 text-xs">
+                        {weeklyData.lowEnergyTasks[index] +
+                          weeklyData.highEnergyTasks[index]}
+                        /
+                        {weeklyData.totalLowTasks[index] +
+                          weeklyData.totalHighTasks[index]}{' '}
+                        total
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex items-center text-xs">
+                        <div className="mr-2 w-12 text-green-500">LOW:</div>
+                        <div className="mr-2 w-20">
+                          {getCompletionBar(
+                            weeklyData.lowEnergyTasks[index],
+                            weeklyData.totalLowTasks[index],
+                          )}
+                        </div>
+                        <div className="text-green-400">
+                          {weeklyData.lowEnergyTasks[index]}/
+                          {weeklyData.totalLowTasks[index]}
+                        </div>
+                      </div>
+                      <div className="flex items-center text-xs">
+                        <div className="mr-2 w-12 text-green-300">HIGH:</div>
+                        <div className="mr-2 w-20">
+                          {getCompletionBar(
+                            weeklyData.highEnergyTasks[index],
+                            weeklyData.totalHighTasks[index],
+                          )}
+                        </div>
+                        <div className="text-green-400">
+                          {weeklyData.highEnergyTasks[index]}/
+                          {weeklyData.totalHighTasks[index]}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Key Insights */}
+        <div className="mx-auto mb-8 max-w-4xl">
+          <div className="mb-4 text-center">
+            <div className="text-green-300 text-base">
+              ┌─────────────────────────────────────────────────────────┐
+            </div>
+            <div className="text-green-300 text-base">│ KEY INSIGHTS │</div>
+            <div className="text-green-300 text-base">
+              └─────────────────────────────────────────────────────────┘
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            {insights.map((insight, index) => (
+              <div
+                key={index}
+                className="bg-green-900 bg-opacity-10 p-3 border border-green-600"
+              >
+                <div className="flex items-start">
+                  <div className="mr-3 text-green-300">►</div>
+                  <div className="text-green-400 text-sm">{insight}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Reflection Questions */}
+        <div className="mx-auto mb-8 max-w-4xl">
+          <div className="mb-4 text-center">
+            <div className="text-green-300 text-base">
+              ┌─────────────────────────────────────────────────────────┐
+            </div>
+            <div className="text-green-300 text-base">
+              │ WEEKLY REFLECTION │
+            </div>
+            <div className="text-green-300 text-base">
+              └─────────────────────────────────────────────────────────┘
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div className="p-4 border border-green-600">
+              <div className="mb-3 text-green-300">
+                [1] What blocked high-energy tasks this week?
+              </div>
+              <textarea
+                value={reflectionAnswers.blockers}
+                onChange={(e) =>
+                  handleReflectionChange('blockers', e.target.value)
+                }
+                placeholder="Type your reflection here..."
+                className="bg-black p-2 border border-green-700 focus:border-green-500 focus:outline-none w-full h-20 font-mono text-green-400 text-sm resize-none"
+                style={{ backgroundColor: '#000', color: '#4ade80' }}
+              />
+              <div className="mt-2 text-green-600 text-xs">
+                Examples: meetings during peak hours, energy dips after lunch,
+                distractions...
+              </div>
+            </div>
+
+            <div className="p-4 border border-green-600">
+              <div className="mb-3 text-green-300">
+                [2] One change for next week?
+              </div>
+              <textarea
+                value={reflectionAnswers.change}
+                onChange={(e) =>
+                  handleReflectionChange('change', e.target.value)
+                }
+                placeholder="Type your actionable change here..."
+                className="bg-black p-2 border border-green-700 focus:border-green-500 focus:outline-none w-full h-20 font-mono text-green-400 text-sm resize-none"
+                style={{ backgroundColor: '#000', color: '#4ade80' }}
+              />
+              <div className="mt-2 text-green-600 text-xs">
+                Keep it simple and specific. What's one small adjustment to try?
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Recommendations */}
+        <div className="mx-auto mb-8 max-w-4xl">
+          <div className="mb-4 text-center">
+            <div className="text-green-500 text-base">
+              ┌─────────────────────────────────────────────────────────┐
+            </div>
+            <div className="text-green-500 text-base">
+              │ RECOMMENDATIONS FOR NEXT WEEK │
+            </div>
+            <div className="text-green-500 text-base">
+              └─────────────────────────────────────────────────────────┘
+            </div>
+          </div>
+
+          <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
+            <div className="p-4 border border-green-600">
+              <div className="mb-2 text-green-300 text-sm">
+                ⚡ ENERGY OPTIMIZATION
+              </div>
+              <div className="mb-2 text-green-400 text-xs">
+                Schedule 2-3 high-energy tasks for Tuesday-Thursday when you're
+                strongest
+              </div>
+              <div className="text-green-600 text-xs">
+                Current sweet spot: 9-11 AM on peak days
+              </div>
+            </div>
+            <div className="p-4 border border-green-600">
+              <div className="mb-2 text-green-300 text-sm">
+                📋 TASK BALANCING
+              </div>
+              <div className="mb-2 text-green-400 text-xs">
+                Add more low-energy buffer tasks for Wednesday recovery
+              </div>
+              <div className="text-green-600 text-xs">
+                Target: 6-8 easy tasks for energy dip days
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="mx-auto mb-8 max-w-2xl">
+          <div className="flex justify-center space-x-8">
+            <button
+              onClick={() => window.history.back()}
+              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-600 text-green-400 transition-colors duration-200"
+            >
+              [ESC] BACK
+            </button>
+
+            <button
+              onClick={() => console.log('Save reflections')}
+              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-500 text-green-400 transition-colors duration-200"
+            >
+              [S] SAVE REFLECTION
+            </button>
+
+            <button
+              onClick={() => console.log('Plan next week')}
+              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-300 text-green-300 transition-colors duration-200"
+            >
+              [ENTER] PLAN NEXT WEEK
+            </button>
+          </div>
+        </div>
+
+        {/* Instructions */}
+        <div className="space-y-2 mb-4 text-green-600 text-xs text-center">
+          <div>┌─────────────────────────────────────────────────────────┐</div>
+          <div>│ [TAB] NAVIGATE FIELDS • [S] SAVE • [P] PRINT REPORT │</div>
+          <div>│ [ESC] BACK • [ENTER] CONTINUE • [←→] PREV WEEK │</div>
+          <div>└─────────────────────────────────────────────────────────┘</div>
+        </div>
+
+        {/* Status Line */}
+        <div className="text-center">
+          <span className="text-green-400">
+            WEEKLY ANALYSIS COMPLETE • READY FOR NEXT WEEK
+            {blinkingCursor ? '█' : ' '}
+          </span>
+        </div>
+
+        {/* Footer */}
+        <div className="right-4 bottom-4 left-4 absolute text-green-700 text-xs text-center">
+          <div>
+            ───────────────────────────────────────────────────────────────
+          </div>
+          <div>F1=HELP • F5=EXPORT DATA • F10=MAIN MENU • ALT+R=REMINDER</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default WeeklyInsightsScreen
