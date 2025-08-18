@@ -35,11 +35,6 @@ const MoodTaskManager = () => {
       second: '2-digit',
     })
 
-  const handleMenuSelect = (option: string) => {
-    // Navigation logic would go here with TanStack Router
-    console.log(`Selected: ${option}`)
-  }
-
   return (
     <div className="flex flex-col items-center bg-black w-full min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
@@ -142,9 +137,9 @@ const MoodTaskManager = () => {
               </div>
             </Link>
 
-            <button
-              onClick={() => handleMenuSelect('weekly-insights')}
-              className="group hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+            <Link
+              to="/weekly-reflection-insights"
+              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[4]</span>
@@ -159,7 +154,7 @@ const MoodTaskManager = () => {
                 </div>
                 <div className="ml-4 text-green-600">▆▆█</div>
               </div>
-            </button>
+            </Link>
           </div>
 
           {/* Instructions */}

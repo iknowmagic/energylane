@@ -9,11 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WeeklyReflectionInsightsRouteImport } from './routes/weekly-reflection-insights'
 import { Route as MoodCheckInRouteImport } from './routes/mood-check-in'
 import { Route as InstantTaskSortRouteImport } from './routes/instant-task-sort'
 import { Route as EnergyAwareAgendaRouteImport } from './routes/energy-aware-agenda'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WeeklyReflectionInsightsRoute =
+  WeeklyReflectionInsightsRouteImport.update({
+    id: '/weekly-reflection-insights',
+    path: '/weekly-reflection-insights',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const MoodCheckInRoute = MoodCheckInRouteImport.update({
   id: '/mood-check-in',
   path: '/mood-check-in',
@@ -40,12 +47,14 @@ export interface FileRoutesByFullPath {
   '/energy-aware-agenda': typeof EnergyAwareAgendaRoute
   '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
+  '/weekly-reflection-insights': typeof WeeklyReflectionInsightsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/energy-aware-agenda': typeof EnergyAwareAgendaRoute
   '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
+  '/weekly-reflection-insights': typeof WeeklyReflectionInsightsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,6 +62,7 @@ export interface FileRoutesById {
   '/energy-aware-agenda': typeof EnergyAwareAgendaRoute
   '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
+  '/weekly-reflection-insights': typeof WeeklyReflectionInsightsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -61,14 +71,21 @@ export interface FileRouteTypes {
     | '/energy-aware-agenda'
     | '/instant-task-sort'
     | '/mood-check-in'
+    | '/weekly-reflection-insights'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/energy-aware-agenda' | '/instant-task-sort' | '/mood-check-in'
+  to:
+    | '/'
+    | '/energy-aware-agenda'
+    | '/instant-task-sort'
+    | '/mood-check-in'
+    | '/weekly-reflection-insights'
   id:
     | '__root__'
     | '/'
     | '/energy-aware-agenda'
     | '/instant-task-sort'
     | '/mood-check-in'
+    | '/weekly-reflection-insights'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,10 +93,18 @@ export interface RootRouteChildren {
   EnergyAwareAgendaRoute: typeof EnergyAwareAgendaRoute
   InstantTaskSortRoute: typeof InstantTaskSortRoute
   MoodCheckInRoute: typeof MoodCheckInRoute
+  WeeklyReflectionInsightsRoute: typeof WeeklyReflectionInsightsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/weekly-reflection-insights': {
+      id: '/weekly-reflection-insights'
+      path: '/weekly-reflection-insights'
+      fullPath: '/weekly-reflection-insights'
+      preLoaderRoute: typeof WeeklyReflectionInsightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mood-check-in': {
       id: '/mood-check-in'
       path: '/mood-check-in'
@@ -116,6 +141,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnergyAwareAgendaRoute: EnergyAwareAgendaRoute,
   InstantTaskSortRoute: InstantTaskSortRoute,
   MoodCheckInRoute: MoodCheckInRoute,
+  WeeklyReflectionInsightsRoute: WeeklyReflectionInsightsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
