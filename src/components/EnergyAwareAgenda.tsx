@@ -15,6 +15,18 @@ export interface Task {
   priority: string
 }
 
+export interface EnergyBarProps {
+  energy: number
+}
+
+export interface EnergyLevelMap {
+  [key: number]: 'PEAK' | 'HIGH' | 'MED' | 'LOW' | 'MIN'
+}
+
+export interface GetTaskColorProps {
+  type: string
+}
+
 const EnergyAgendaScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
@@ -117,8 +129,6 @@ const EnergyAgendaScreen = () => {
     }
   }, [])
 
-  type EnergyPattern = Record<string, number>
-
   const formatTime = (date: Date): string => {
     return date.toLocaleTimeString('en-US', {
       hour12: false,
@@ -128,25 +138,14 @@ const EnergyAgendaScreen = () => {
     })
   }
 
-  interface FormatDateOptions {
-    weekday: 'long'
-    year: 'numeric'
-    month: 'long'
-    day: 'numeric'
-  }
-
   const formatDate = (date: Date): string => {
-    const options: FormatDateOptions = {
+    const options: Intl.DateTimeFormatOptions = {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     }
     return date.toLocaleDateString('en-US', options)
-  }
-
-  interface EnergyBarProps {
-    energy: number
   }
 
   const getEnergyBar = (energy: EnergyBarProps['energy']): string => {
@@ -157,10 +156,6 @@ const EnergyAgendaScreen = () => {
     return '░░░░░░░░'
   }
 
-  interface EnergyLevelMap {
-    [key: number]: 'PEAK' | 'HIGH' | 'MED' | 'LOW' | 'MIN'
-  }
-
   const getEnergyLevel = (energy: number): EnergyLevelMap[number] => {
     if (energy >= 8) return 'PEAK'
     if (energy >= 6) return 'HIGH'
@@ -169,23 +164,11 @@ const EnergyAgendaScreen = () => {
     return 'MIN'
   }
 
-  interface EnergyColorMap {
-    [key: number]: string
-  }
-
   const getEnergyColor = (energy: number): string => {
     if (energy >= 8) return 'text-green-300 bg-green-900 bg-opacity-40'
     if (energy >= 6) return 'text-green-400 bg-green-900 bg-opacity-20'
     if (energy >= 4) return 'text-green-500'
     return 'text-green-600'
-  }
-
-  interface TaskColorMap {
-    [key: string]: string
-  }
-
-  interface GetTaskColorProps {
-    type: string
   }
 
   const getTaskColor = (task: GetTaskColorProps): string => {
