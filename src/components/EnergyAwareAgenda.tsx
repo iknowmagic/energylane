@@ -404,19 +404,19 @@ const EnergyAgendaScreen = () => {
         </div>
 
         {/* Blinking cursor */}
-        <div className="text-center">
+        <div className="mt-4 text-center">
           <span className="text-green-400">
             AGENDA OPTIMIZED FOR ENERGY PATTERNS{blinkingCursor ? '█' : ' '}
           </span>
         </div>
+      </div>
 
-        {/* Footer */}
-        <div className="right-4 bottom-4 left-4 absolute text-green-700 text-xs text-center">
-          <div>
-            ───────────────────────────────────────────────────────────────
-          </div>
-          <div>F1=HELP • F3=TASK SORT • F4=INSIGHTS • F10=MAIN MENU</div>
+      {/* Footer */}
+      <div className="right-4 bottom-4 left-4 mb-4 text-green-700 text-xs text-center">
+        <div>
+          ───────────────────────────────────────────────────────────────
         </div>
+        <div>F1=HELP • F3=TASK SORT • F4=INSIGHTS • F10=MAIN MENU</div>
       </div>
     </div>
   )
