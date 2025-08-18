@@ -7,5 +7,9 @@ export const Route = createFileRoute('/')({
 import MoodTaskManager from '@/components/MoodTaskManager'
 
 function App() {
-  return <MoodTaskManager />
+  return (
+    <div className="max-w-[800px]">
+      <MoodTaskManager />
+    </div>
+  )
 }

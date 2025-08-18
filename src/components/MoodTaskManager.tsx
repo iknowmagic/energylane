@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react'
+import { big, useAsciiText } from 'react-ascii-text'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const asciiTextRef = useAsciiText({
+    isAnimated: false,
+    font: big,
+    text: ['ENERGYLANE'],
+    // animation options available
+  }) as React.MutableRefObject<HTMLPreElement | null>
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,21 +50,7 @@ const MoodTaskManager = () => {
           <div className="mb-2 text-green-300">
             ════════════════════════════════════════════════════════════════
           </div>
-          <div className="mb-1 text-xl tracking-wider">
-            ██████╗ ███╗ ███╗████████╗███╗ ███╗
-          </div>
-          <div className="mb-1 text-xl tracking-wider">
-            ██╔══██╗████╗ ████║╚══██╔══╝████╗ ████║
-          </div>
-          <div className="mb-1 text-xl tracking-wider">
-            ██████╔╝██╔████╔██║ ██║ ██╔████╔██║
-          </div>
-          <div className="mb-1 text-xl tracking-wider">
-            ██╔═══╝ ██║╚██╔╝██║ ██║ ██║╚██╔╝██║
-          </div>
-          <div className="mb-4 text-xl tracking-wider">
-            ██║ ██║ ╚═╝ ██║ ██║ ██║ ╚═╝ ██║
-          </div>
+          <pre ref={asciiTextRef}></pre>
           <div className="mb-2 text-green-300 text-lg tracking-widest">
             PRODUCTIVITY MOOD TASK MANAGER
           </div>
@@ -189,7 +182,7 @@ const MoodTaskManager = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 absolute text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 text-green-700 text-xs text-center">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>
