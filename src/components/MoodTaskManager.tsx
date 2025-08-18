@@ -123,9 +123,9 @@ const MoodTaskManager = () => {
               </div>
             </Link>
 
-            <button
-              onClick={() => handleMenuSelect('energy-agenda')}
-              className="group hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+            <Link
+              to="/energy-aware-agenda"
+              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[3]</span>
@@ -140,7 +140,7 @@ const MoodTaskManager = () => {
                 </div>
                 <div className="ml-4 text-green-600">████</div>
               </div>
-            </button>
+            </Link>
 
             <button
               onClick={() => handleMenuSelect('weekly-insights')}

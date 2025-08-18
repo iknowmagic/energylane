@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MoodCheckInRouteImport } from './routes/mood-check-in'
 import { Route as InstantTaskSortRouteImport } from './routes/instant-task-sort'
+import { Route as EnergyAwareAgendaRouteImport } from './routes/energy-aware-agenda'
 import { Route as IndexRouteImport } from './routes/index'
 
 const MoodCheckInRoute = MoodCheckInRouteImport.update({
@@ -23,6 +24,11 @@ const InstantTaskSortRoute = InstantTaskSortRouteImport.update({
   path: '/instant-task-sort',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnergyAwareAgendaRoute = EnergyAwareAgendaRouteImport.update({
+  id: '/energy-aware-agenda',
+  path: '/energy-aware-agenda',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,30 +37,43 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/energy-aware-agenda': typeof EnergyAwareAgendaRoute
   '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/energy-aware-agenda': typeof EnergyAwareAgendaRoute
   '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/energy-aware-agenda': typeof EnergyAwareAgendaRoute
   '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/instant-task-sort' | '/mood-check-in'
+  fullPaths:
+    | '/'
+    | '/energy-aware-agenda'
+    | '/instant-task-sort'
+    | '/mood-check-in'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/instant-task-sort' | '/mood-check-in'
-  id: '__root__' | '/' | '/instant-task-sort' | '/mood-check-in'
+  to: '/' | '/energy-aware-agenda' | '/instant-task-sort' | '/mood-check-in'
+  id:
+    | '__root__'
+    | '/'
+    | '/energy-aware-agenda'
+    | '/instant-task-sort'
+    | '/mood-check-in'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EnergyAwareAgendaRoute: typeof EnergyAwareAgendaRoute
   InstantTaskSortRoute: typeof InstantTaskSortRoute
   MoodCheckInRoute: typeof MoodCheckInRoute
 }
@@ -75,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InstantTaskSortRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/energy-aware-agenda': {
+      id: '/energy-aware-agenda'
+      path: '/energy-aware-agenda'
+      fullPath: '/energy-aware-agenda'
+      preLoaderRoute: typeof EnergyAwareAgendaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +113,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EnergyAwareAgendaRoute: EnergyAwareAgendaRoute,
   InstantTaskSortRoute: InstantTaskSortRoute,
   MoodCheckInRoute: MoodCheckInRoute,
 }

@@ -166,11 +166,11 @@ const InstantTaskSortScreen = () => {
   const topThreeTasks = sortedTasks.slice(0, 3)
 
   return (
-    <div className="bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
       <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-400 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
 
-      <div className="z-10 relative p-4">
+      <div className="z-10 relative p-4 w-full max-w-[800px]">
         {/* Header */}
         <div className="flex justify-between items-center mb-6 text-xs">
           <div className="text-green-500">ENERGYLANE v1.0</div>
@@ -197,6 +197,13 @@ const InstantTaskSortScreen = () => {
           <div className="text-green-300">
             ════════════════════════════════════════════════════════════════
           </div>
+        </div>
+
+        {/* System Info */}
+        <div className="grid grid-cols-3 mb-8 text-green-500 text-xs text-center">
+          <div>TIME: {formatTime(currentTime)}</div>
+          <div>ENERGYLANE</div>
+          <div>USER: ILAN_KAIM</div>
         </div>
 
         {/* Current Energy Status */}
@@ -346,15 +353,15 @@ const InstantTaskSortScreen = () => {
         </div>
 
         {/* Instructions */}
-        <div className="space-y-2 mb-4 text-green-600 text-xs text-center">
+        <div className="space-y-2 text-green-600 text-xs text-center">
           <div>┌─────────────────────────────────────────────────────────┐</div>
           <div>│ [1-8] SELECT TASK • [R] REFRESH • [ENTER] NEXT MODULE │</div>
           <div>│ [ESC] BACK • [SPACE] MARK COMPLETE │</div>
           <div>└─────────────────────────────────────────────────────────┘</div>
         </div>
 
-        {/* Status Line */}
-        <div className="text-center">
+        {/* Blinking cursor */}
+        <div className="mt-4 text-center">
           <span className="text-green-400">
             {sortAnimation
               ? 'SORTING TASKS...'
@@ -364,7 +371,7 @@ const InstantTaskSortScreen = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 absolute text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 text-green-700 text-xs text-center">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>
