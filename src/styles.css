@@ -17,3 +17,9 @@ code {
 button {
   @apply cursor-pointer;
 }
+
+@layer utilities {
+  .pulse-slow {
+    animation-duration: 15s !important; /* or any slower value */
+  }
+}

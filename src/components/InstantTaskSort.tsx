@@ -168,7 +168,7 @@ const InstantTaskSortScreen = () => {
   return (
     <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
-      <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-400 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
+      <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-900 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
 
       <div className="z-10 relative p-4 w-full max-w-[800px]">
         {/* Header */}
