@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MoodCheckInRouteImport } from './routes/mood-check-in'
+import { Route as InstantTaskSortRouteImport } from './routes/instant-task-sort'
 import { Route as IndexRouteImport } from './routes/index'
 
 const MoodCheckInRoute = MoodCheckInRouteImport.update({
   id: '/mood-check-in',
   path: '/mood-check-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstantTaskSortRoute = InstantTaskSortRouteImport.update({
+  id: '/instant-task-sort',
+  path: '/instant-task-sort',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/instant-task-sort': typeof InstantTaskSortRoute
   '/mood-check-in': typeof MoodCheckInRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/mood-check-in'
+  fullPaths: '/' | '/instant-task-sort' | '/mood-check-in'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/mood-check-in'
-  id: '__root__' | '/' | '/mood-check-in'
+  to: '/' | '/instant-task-sort' | '/mood-check-in'
+  id: '__root__' | '/' | '/instant-task-sort' | '/mood-check-in'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InstantTaskSortRoute: typeof InstantTaskSortRoute
   MoodCheckInRoute: typeof MoodCheckInRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/mood-check-in'
       fullPath: '/mood-check-in'
       preLoaderRoute: typeof MoodCheckInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instant-task-sort': {
+      id: '/instant-task-sort'
+      path: '/instant-task-sort'
+      fullPath: '/instant-task-sort'
+      preLoaderRoute: typeof InstantTaskSortRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InstantTaskSortRoute: InstantTaskSortRoute,
   MoodCheckInRoute: MoodCheckInRoute,
 }
 export const routeTree = rootRouteImport
