@@ -1,5 +1,6 @@
 {
-  "name": "0-to-prototype",
+  "description": "ENERGYLANE: A productivity app with mood check-in, instant task sorting, energy-aware agenda, and weekly reflection insights. Features include context-aware task suggestions, auto-scheduling for peak energy, and actionable weekly reviews.",
+  "name": "energylane",
   "private": true,
   "type": "module",
   "scripts": {
