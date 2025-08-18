@@ -103,11 +103,11 @@ const WeeklyInsightsScreen = () => {
   }
 
   return (
-    <div className="bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
       <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-400 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
 
-      <div className="z-10 relative p-4">
+      <div className="z-10 relative p-4 w-full max-w-[800px]">
         {/* Header */}
         <div className="flex justify-between items-center mb-6 text-xs">
           <div className="text-green-500">ENERGYLANE v1.0</div>
@@ -434,7 +434,7 @@ const WeeklyInsightsScreen = () => {
         </div>
 
         {/* Status Line */}
-        <div className="text-center">
+        <div className="mt-4 text-center">
           <span className="text-green-400">
             WEEKLY ANALYSIS COMPLETE • READY FOR NEXT WEEK
             {blinkingCursor ? '█' : ' '}
@@ -442,7 +442,7 @@ const WeeklyInsightsScreen = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 absolute text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 mb-4 text-green-700 text-xs text-center">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>
