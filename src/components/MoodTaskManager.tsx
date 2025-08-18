@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { big, useAsciiText } from 'react-ascii-text'
 
@@ -40,11 +41,11 @@ const MoodTaskManager = () => {
   }
 
   return (
-    <div className="bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
       <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-400 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
 
-      <div className="z-10 relative p-4">
+      <div className="z-10 relative p-4 w-full max-w-[760px]">
         {/* Header */}
         <div className="mb-8 text-center">
           <div className="mb-2 text-green-300">
@@ -63,14 +64,14 @@ const MoodTaskManager = () => {
         </div>
 
         {/* System Info */}
-        <div className="flex justify-between mb-8 text-green-500 text-xs">
+        <div className="grid grid-cols-3 mb-8 text-green-500 text-xs text-center">
           <div>SYSTEM TIME: {formatTime(currentTime)}</div>
           <div>MEMORY: 640K OK</div>
           <div>USER: ILAN_KAIM</div>
         </div>
 
         {/* Main Menu */}
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto w-full">
           <div className="mb-6 text-center">
             <div className="text-green-300 text-lg tracking-wider">
               ╔══════════════════════════════════════════════════════════╗
@@ -83,10 +84,10 @@ const MoodTaskManager = () => {
             </div>
           </div>
 
-          <div className="space-y-4 mb-8">
-            <button
-              onClick={() => handleMenuSelect('mood-checkin')}
-              className="group hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+          <div className="flex flex-col gap-4 mb-6">
+            <Link
+              to="/mood-check-in"
+              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[1]</span>
@@ -101,7 +102,7 @@ const MoodTaskManager = () => {
                 </div>
                 <div className="ml-4 text-green-600">😊 ⚡ 😴</div>
               </div>
-            </button>
+            </Link>
 
             <button
               onClick={() => handleMenuSelect('instant-task-sort')}
