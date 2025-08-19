@@ -1,3 +1,4 @@
+import { genLine } from '@/utils'
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { big, standard, useAsciiText } from 'react-ascii-text'
@@ -56,7 +57,8 @@ const MoodTaskManager = () => {
         {/* Header */}
         <div className="mb-8 text-center">
           <div className="mb-2 text-green-300">
-            ════════════════════════════════════════════════════════════════
+            <span className="md:hidden">{genLine(40)}</span>
+            <span className="hidden md:block">{genLine(65)}</span>
           </div>
           <div className="md:hidden text-xs">
             <pre ref={asciiTextRefSmall1}></pre>
@@ -70,7 +72,8 @@ const MoodTaskManager = () => {
             VERSION 1.0 • COPYRIGHT 2025 • MOOD SYSTEMS INC
           </div>
           <div className="mt-2 text-green-300">
-            ════════════════════════════════════════════════════════════════
+            <span className="md:hidden">{genLine(40)}</span>
+            <span className="hidden md:block">{genLine(65)}</span>
           </div>
         </div>
 
@@ -84,14 +87,14 @@ const MoodTaskManager = () => {
         {/* Main Menu */}
         <div className="mx-auto w-full">
           <div className="mb-6 text-center">
-            <div className="text-green-300 text-lg tracking-wider">
-              ╔══════════════════════════════════════════════════════════╗
+            <div className="text-green-300 text-lg">
+              <span className="md:hidden">╔{genLine(20)}╗</span>
+              <span className="hidden md:block">╔{genLine(60)}╗</span>
             </div>
-            <div className="text-green-300 text-lg tracking-wider">
-              ║ MAIN MENU ║
-            </div>
-            <div className="text-green-300 text-lg tracking-wider">
-              ╚══════════════════════════════════════════════════════════╝
+            <div className="text-green-300 text-lg">║ MAIN MENU ║</div>
+            <div className="text-green-300 text-lg">
+              <span className="md:hidden">╚{genLine(20)}╝</span>
+              <span className="hidden md:block">╚{genLine(60)}╝</span>
             </div>
           </div>
 
