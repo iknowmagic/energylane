@@ -1,4 +1,6 @@
+import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import Button from './Button'
 import SectionHeader from './SectionHeader'
 import SystemInfo from './SystemInfo'
 
@@ -25,6 +27,7 @@ export type HandleReflectionChangeFn = (field: string, value: string) => void
 const WeeklyInsightsScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const navigate = useNavigate()
   const [currentWeek] = useState('AUG 11-17, 2025')
   const [reflectionAnswers, setReflectionAnswers] = useState({
     blockers: '',
@@ -385,26 +388,21 @@ const WeeklyInsightsScreen = () => {
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
           <div className="flex justify-center space-x-8">
-            <button
-              onClick={() => window.history.back()}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-600 text-green-400 transition-colors duration-200"
-            >
-              [ESC] BACK
-            </button>
-
-            <button
+            <Button
+              shortcut="[ESC]"
+              text="Back"
+              onClick={() => navigate({ to: '/' })}
+            />
+            <Button
+              shortcut="[S]"
+              text="Save Reflection"
               onClick={() => console.log('Save reflections')}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-500 text-green-400 transition-colors duration-200"
-            >
-              [S] SAVE REFLECTION
-            </button>
-
-            <button
-              onClick={() => console.log('Plan next week')}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-300 text-green-300 transition-colors duration-200"
-            >
-              [ENTER] PLAN NEXT WEEK
-            </button>
+            />
+            <Button
+              shortcut="[ENTER]"
+              text="Plan Next Week"
+              onClick={() => navigate({ to: '/energy-aware-agenda' })}
+            />
           </div>
         </div>
 

@@ -1,4 +1,6 @@
+import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import Button from './Button'
 import SectionHeader from './SectionHeader'
 import SystemInfo from './SystemInfo'
 
@@ -32,6 +34,7 @@ export interface GetTaskColorProps {
 const EnergyAgendaScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const navigate = useNavigate()
   const [selectedDate] = useState(new Date(2025, 7, 17)) // August 17, 2025
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 })
 
@@ -357,24 +360,21 @@ const EnergyAgendaScreen = () => {
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
           <div className="flex justify-center space-x-8">
-            <button
-              onClick={() => window.history.back()}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-600 text-green-400 transition-colors duration-200"
-            >
-              [ESC] BACK
-            </button>
-            <button
+            <Button
+              shortcut="[ESC]"
+              text="Back"
+              onClick={() => navigate({ to: '/' })}
+            />
+            <Button
+              shortcut="[R]"
+              text="Reschedule"
               onClick={() => console.log('Reschedule tasks')}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-500 text-green-400 transition-colors duration-200"
-            >
-              [R] RESCHEDULE
-            </button>
-            <button
-              onClick={() => console.log('Navigate to insights')}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-300 text-green-300 transition-colors duration-200"
-            >
-              [ENTER] WEEKLY INSIGHTS
-            </button>
+            />
+            <Button
+              shortcut="[ENTER]"
+              text="Weekly Insights"
+              onClick={() => navigate({ to: '/weekly-reflection-insights' })}
+            />
           </div>
         </div>
 

@@ -1,4 +1,6 @@
+import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import Button from './Button'
 import SectionHeader from './SectionHeader'
 import SystemInfo from './SystemInfo'
 
@@ -20,6 +22,7 @@ export interface Mood {
 const InstantTaskSortScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const navigate = useNavigate()
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 }) // Would come from previous screen
   const [sortAnimation, setSortAnimation] = useState(false)
 
@@ -303,26 +306,21 @@ const InstantTaskSortScreen = () => {
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
           <div className="flex justify-center space-x-8">
-            <button
-              onClick={() => window.history.back()}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-600 text-green-400 transition-colors duration-200"
-            >
-              [ESC] BACK
-            </button>
-
-            <button
+            <Button
+              shortcut="[ESC]"
+              text="Back"
+              onClick={() => navigate({ to: '/' })}
+            />
+            <Button
+              shortcut="[R]"
+              text="Refresh Sort"
               onClick={() => setSortAnimation(true)}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-500 text-green-400 transition-colors duration-200"
-            >
-              [R] REFRESH SORT
-            </button>
-
-            <button
-              onClick={() => console.log('Navigate to agenda')}
-              className="hover:bg-green-900 hover:bg-opacity-30 px-6 py-3 border border-green-300 text-green-300 transition-colors duration-200"
-            >
-              [ENTER] VIEW AGENDA
-            </button>
+            />
+            <Button
+              shortcut="[ENTER]"
+              text="View Agenda"
+              onClick={() => navigate({ to: '/energy-aware-agenda' })}
+            />
           </div>
         </div>
 
