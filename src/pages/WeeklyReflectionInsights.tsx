@@ -388,7 +388,7 @@ const WeeklyInsightsScreen = () => {
 
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
-          <div className="flex justify-center space-x-8">
+          <div className="grid justify-center gap-8 md:flex md:flex-row">
             <Button
               shortcut="[ESC]"
               text="Back"
