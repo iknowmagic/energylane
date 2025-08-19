@@ -1,9 +1,12 @@
+import ColorFilter from '@/components/ColorFilter'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Outlet />
+      <ColorFilter>
+        <Outlet />
+      </ColorFilter>
       {/* <TanstackDevtools
         config={{
           position: 'bottom-left',

@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import Hero from '../components/Hero'
 import MainHeader from '../components/MainHeader'
+import ScanLinesEffect from '../components/ScanLinesEffect'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -33,7 +34,7 @@ const MoodTaskManager = () => {
   return (
     <div className="flex flex-col items-center bg-black w-full min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
       {/* Scanlines effect */}
-      <div className="fixed inset-0 bg-[length:100%_4px] bg-gradient-to-b from-transparent via-green-950 to-transparent opacity-20 animate-pulse pointer-events-none"></div>
+      <ScanLinesEffect />
 
       <div className="z-10 relative p-4 w-full max-w-[760px]">
         {/* Header */}
