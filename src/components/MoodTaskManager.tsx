@@ -1,10 +1,22 @@
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { big, useAsciiText } from 'react-ascii-text'
+import { big, standard, useAsciiText } from 'react-ascii-text'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const asciiTextRefSmall1 = useAsciiText({
+    isAnimated: false,
+    font: standard,
+    text: ['ENERGY'],
+    // animation options available
+  }) as React.MutableRefObject<HTMLPreElement | null>
+  const asciiTextRefSmall2 = useAsciiText({
+    isAnimated: false,
+    font: standard,
+    text: ['LANE'],
+    // animation options available
+  }) as React.MutableRefObject<HTMLPreElement | null>
   const asciiTextRef = useAsciiText({
     isAnimated: false,
     font: big,
@@ -46,7 +58,11 @@ const MoodTaskManager = () => {
           <div className="mb-2 text-green-300">
             ════════════════════════════════════════════════════════════════
           </div>
-          <pre ref={asciiTextRef}></pre>
+          <div className="md:hidden text-xs">
+            <pre ref={asciiTextRefSmall1}></pre>
+            <pre ref={asciiTextRefSmall2}></pre>
+          </div>
+          <pre ref={asciiTextRef} className="hidden md:block"></pre>
           <div className="mb-2 text-green-300 text-lg tracking-widest">
             PRODUCTIVITY MOOD TASK MANAGER
           </div>
