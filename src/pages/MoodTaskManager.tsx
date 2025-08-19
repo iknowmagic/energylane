@@ -1,29 +1,12 @@
 import { MenuItem } from '@/components/MenuItem'
-import { useEffect, useState } from 'react'
 import BlinkingCursor from '../components/BlinkingCursor'
 import Hero from '../components/Hero'
 import MainHeader from '../components/MainHeader'
 import ScanLinesEffect from '../components/ScanLinesEffect'
+import SystemInfoMain from '../components/SystemInfoMain'
 
 const MoodTaskManager = () => {
-  const [currentTime, setCurrentTime] = useState(new Date())
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
-
-  const formatTime = (date: Date) =>
-    date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
+  // System info logic moved to SystemInfoMain component
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
@@ -35,11 +18,7 @@ const MoodTaskManager = () => {
         <Hero />
 
         {/* System Info */}
-        <div className="mb-8 grid grid-cols-3 text-center text-xs text-green-500">
-          <div>SYSTEM TIME: {formatTime(currentTime)}</div>
-          <div>MEMORY: 640K OK</div>
-          <div>USER: ILAN_KAIM</div>
-        </div>
+        <SystemInfoMain />
 
         {/* Main Menu */}
         <div className="mx-auto w-full">
