@@ -1,30 +1,11 @@
-import { genLine } from '@/utils'
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { big, standard, useAsciiText } from 'react-ascii-text'
+import Hero from './Hero'
 import MainHeader from './MainHeader'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
-  const asciiTextRefSmall1 = useAsciiText({
-    isAnimated: false,
-    font: standard,
-    text: ['ENERGY'],
-    // animation options available
-  }) as React.MutableRefObject<HTMLPreElement | null>
-  const asciiTextRefSmall2 = useAsciiText({
-    isAnimated: false,
-    font: standard,
-    text: ['LANE'],
-    // animation options available
-  }) as React.MutableRefObject<HTMLPreElement | null>
-  const asciiTextRef = useAsciiText({
-    isAnimated: false,
-    font: big,
-    text: ['ENERGYLANE'],
-    // animation options available
-  }) as React.MutableRefObject<HTMLPreElement | null>
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -56,27 +37,7 @@ const MoodTaskManager = () => {
 
       <div className="z-10 relative p-4 w-full max-w-[760px]">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <div className="mb-2 text-green-300">
-            <span className="md:hidden">{genLine(40)}</span>
-            <span className="hidden md:block">{genLine(65)}</span>
-          </div>
-          <div className="md:hidden text-xs">
-            <pre ref={asciiTextRefSmall1}></pre>
-            <pre ref={asciiTextRefSmall2}></pre>
-          </div>
-          <pre ref={asciiTextRef} className="hidden md:block"></pre>
-          <div className="mb-2 text-green-300 text-lg tracking-widest">
-            PRODUCTIVITY MOOD TASK MANAGER
-          </div>
-          <div className="text-green-500 text-xs">
-            VERSION 1.0 • COPYRIGHT 2025 • MOOD SYSTEMS INC
-          </div>
-          <div className="mt-2 text-green-300">
-            <span className="md:hidden">{genLine(40)}</span>
-            <span className="hidden md:block">{genLine(65)}</span>
-          </div>
-        </div>
+        <Hero />
 
         {/* System Info */}
         <div className="grid grid-cols-3 mb-8 text-green-500 text-xs text-center">
