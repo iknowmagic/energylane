@@ -28,7 +28,28 @@ export type HandleReflectionChangeFn = (field: string, value: string) => void
 const WeeklyInsightsScreen = () => {
   // Removed unused currentTime state
   const navigate = useNavigate()
-  const [currentWeek] = useState('AUG 11-17, 2025')
+  // Helper to get current week range (Monday-Sunday)
+  function getLastWeekRange(): string {
+    const today = new Date()
+    // Get day of week (0=Sun, 1=Mon, ...)
+    const dayOfWeek = today.getDay()
+    // Calculate last week's Monday
+    const monday = new Date(today)
+    monday.setDate(today.getDate() - ((dayOfWeek + 6) % 7) - 7)
+    // Calculate last week's Sunday
+    const sunday = new Date(monday)
+    sunday.setDate(monday.getDate() + 6)
+    // Format
+    const month = monday
+      .toLocaleString('en-US', { month: 'short' })
+      .toUpperCase()
+    const year = monday.getFullYear()
+    const startDay = monday.getDate()
+    const endDay = sunday.getDate()
+    return `${month} ${startDay}-${endDay}, ${year}`
+  }
+
+  const [currentWeek] = useState(getLastWeekRange())
   const [reflectionAnswers, setReflectionAnswers] = useState({
     blockers: '',
     change: '',

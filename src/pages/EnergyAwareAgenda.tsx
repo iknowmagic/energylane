@@ -35,7 +35,7 @@ export interface GetTaskColorProps {
 
 const EnergyAgendaScreen = () => {
   const navigate = useNavigate()
-  const [selectedDate] = useState(new Date(2025, 7, 17)) // August 17, 2025
+  const [selectedDate] = useState(new Date()) // (new Date(2025, 7, 17) -> August 17, 2025
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 })
 
   // Energy patterns throughout the day (0-10 scale)
