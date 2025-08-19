@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import BlinkingCursor from '../components/BlinkingCursor'
 import Button from '../components/Button'
 import ScanLinesEffect from '../components/ScanLinesEffect'
 import SectionHeader from '../components/SectionHeader'
@@ -22,7 +23,6 @@ export interface Mood {
 
 const InstantTaskSortScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [blinkingCursor, setBlinkingCursor] = useState(true)
   const navigate = useNavigate()
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 }) // Would come from previous screen
   const [sortAnimation, setSortAnimation] = useState(false)
@@ -99,18 +99,11 @@ const InstantTaskSortScreen = () => {
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
-
-    const blinkTimer = setInterval(() => {
-      setBlinkingCursor((prev) => !prev)
-    }, 800)
-
     // Trigger sort animation on load
     setSortAnimation(true)
     const animTimer = setTimeout(() => setSortAnimation(false), 1500)
-
     return () => {
       clearInterval(timer)
-      clearInterval(blinkTimer)
       clearTimeout(animTimer)
     }
   }, [])
@@ -335,12 +328,13 @@ const InstantTaskSortScreen = () => {
 
         {/* Blinking cursor */}
         <div className="mt-4 text-center">
-          <span className="text-green-400">
-            {sortAnimation
-              ? 'SORTING TASKS...'
-              : 'TASKS SORTED BY ENERGY MATCH'}
-            {blinkingCursor ? '█' : ' '}
-          </span>
+          <BlinkingCursor
+            text={
+              sortAnimation
+                ? 'SORTING TASKS...'
+                : 'TASKS SORTED BY ENERGY MATCH'
+            }
+          />
         </div>
 
         {/* Footer */}

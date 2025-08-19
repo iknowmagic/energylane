@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import BlinkingCursor from '../components/BlinkingCursor'
 import Button from '../components/Button'
 import ScanLinesEffect from '../components/ScanLinesEffect'
 import SectionHeader from '../components/SectionHeader'
@@ -34,7 +35,6 @@ export interface GetTaskColorProps {
 
 const EnergyAgendaScreen = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [blinkingCursor, setBlinkingCursor] = useState(true)
   const navigate = useNavigate()
   const [selectedDate] = useState(new Date(2025, 7, 17)) // August 17, 2025
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 })
@@ -124,14 +124,8 @@ const EnergyAgendaScreen = () => {
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
-
-    const blinkTimer = setInterval(() => {
-      setBlinkingCursor((prev) => !prev)
-    }, 800)
-
     return () => {
       clearInterval(timer)
-      clearInterval(blinkTimer)
     }
   }, [])
 
@@ -389,9 +383,7 @@ const EnergyAgendaScreen = () => {
 
         {/* Blinking cursor */}
         <div className="mt-4 text-center">
-          <span className="text-green-400">
-            AGENDA OPTIMIZED FOR ENERGY PATTERNS{blinkingCursor ? '█' : ' '}
-          </span>
+          <BlinkingCursor text="AGENDA OPTIMIZED FOR ENERGY PATTERNS" />
         </div>
       </div>
 

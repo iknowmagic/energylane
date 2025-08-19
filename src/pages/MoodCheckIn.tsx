@@ -1,5 +1,6 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import BlinkingCursor from '../components/BlinkingCursor'
 import Button from '../components/Button'
 import ScanLinesEffect from '../components/ScanLinesEffect'
 import SectionHeader from '../components/SectionHeader'
@@ -16,7 +17,6 @@ export interface Mood {
 const MoodCheckIn = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null)
-  const [blinkingCursor, setBlinkingCursor] = useState(true)
   const navigate = useNavigate()
 
   const moods = [
@@ -68,14 +68,8 @@ const MoodCheckIn = () => {
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
-
-    const blinkTimer = setInterval(() => {
-      setBlinkingCursor((prev) => !prev)
-    }, 500)
-
     return () => {
       clearInterval(timer)
-      clearInterval(blinkTimer)
     }
   }, [])
 
@@ -205,12 +199,13 @@ const MoodCheckIn = () => {
 
         {/* Blinking cursor */}
         <div className="mt-4 text-center">
-          <span className="text-green-400">
-            {selectedMood
-              ? `MOOD SELECTED: ${selectedMood.label}`
-              : 'SELECT MOOD TO CONTINUE'}
-            {blinkingCursor ? '█' : ' '}
-          </span>
+          <BlinkingCursor
+            text={
+              selectedMood
+                ? `MOOD SELECTED: ${selectedMood.label}`
+                : 'SELECT MOOD TO CONTINUE'
+            }
+          />
         </div>
 
         {/* Footer */}
