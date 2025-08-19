@@ -2,6 +2,7 @@ import { genLine } from '@/utils'
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { big, standard, useAsciiText } from 'react-ascii-text'
+import MainHeader from './MainHeader'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -86,17 +87,7 @@ const MoodTaskManager = () => {
 
         {/* Main Menu */}
         <div className="mx-auto w-full">
-          <div className="mb-6 text-center">
-            <div className="text-green-300 text-lg">
-              <span className="md:hidden">╔{genLine(20)}╗</span>
-              <span className="hidden md:block">╔{genLine(60)}╗</span>
-            </div>
-            <div className="text-green-300 text-lg">║ MAIN MENU ║</div>
-            <div className="text-green-300 text-lg">
-              <span className="md:hidden">╚{genLine(20)}╝</span>
-              <span className="hidden md:block">╚{genLine(60)}╝</span>
-            </div>
-          </div>
+          <MainHeader title="MAIN MENU" />
 
           <div className="flex flex-col gap-4 mb-6">
             <Link
