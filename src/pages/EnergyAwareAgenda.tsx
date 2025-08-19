@@ -189,27 +189,27 @@ const EnergyAgendaScreen = () => {
   const currentHour = currentTime.getHours()
 
   return (
-    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex min-h-screen flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
       {/* Scanlines effect */}
       <ScanLinesEffect />
 
-      <div className="z-10 relative p-4 w-full max-w-[800px]">
+      <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
         <SectionHeader title="ENERGY-AWARE AGENDA">
-          <div className="mb-2 text-green-500 text-sm">
+          <div className="mb-2 text-sm text-green-500">
             {formatDate(selectedDate).toUpperCase()}
           </div>
-          <div className="mb-4 text-green-500 text-xs">
+          <div className="mb-4 text-xs text-green-500">
             TASKS AUTOMATICALLY SCHEDULED FOR OPTIMAL ENERGY ALIGNMENT
           </div>
         </SectionHeader>
 
         {/* Current Energy Status */}
         <div className="mx-auto mb-8 max-w-4xl">
-          <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600 text-center">
-            <div className="mb-2 text-green-300 text-lg">
+          <div className="bg-opacity-20 border border-green-600 bg-green-900 p-4 text-center">
+            <div className="mb-2 text-lg text-green-300">
               CURRENT ENERGY: {currentMood.emoji} {currentMood.label}
             </div>
             <div className="text-green-400">
@@ -221,17 +221,17 @@ const EnergyAgendaScreen = () => {
 
         {/* Main Sections: Energy Timeline & Scheduled Tasks */}
         <div className="mx-auto mb-8 max-w-6xl">
-          <div className="gap-8 grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {/* Energy Timeline */}
             <div>
               <div className="mb-4 text-center">
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   ┌─────────────────────────────────────┐
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   │ ENERGY TIMELINE │
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   └─────────────────────────────────────┘
                 </div>
               </div>
@@ -243,7 +243,7 @@ const EnergyAgendaScreen = () => {
                   return (
                     <div
                       key={time}
-                      className={`flex items-center p-2 border ${isCurrentHour ? 'border-green-300 bg-green-900 bg-opacity-40' : 'border-green-600'} ${getEnergyColor(energy)}`}
+                      className={`flex items-center border p-2 ${isCurrentHour ? 'bg-opacity-40 border-green-300 bg-green-900' : 'border-green-600'} ${getEnergyColor(energy)}`}
                     >
                       <div className="mr-4 w-12 text-right">{time}</div>
                       <div className="flex-1">
@@ -255,7 +255,7 @@ const EnergyAgendaScreen = () => {
                             {getEnergyLevel(energy)} ({energy}/10)
                           </div>
                           {isCurrentHour && (
-                            <div className="ml-2 text-green-300 text-xs">
+                            <div className="ml-2 text-xs text-green-300">
                               ← NOW
                             </div>
                           )}
@@ -269,13 +269,13 @@ const EnergyAgendaScreen = () => {
             {/* Scheduled Tasks */}
             <div>
               <div className="mb-4 text-center">
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   ┌─────────────────────────────────────┐
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   │ SCHEDULED TASKS │
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   └─────────────────────────────────────┘
                 </div>
               </div>
@@ -294,9 +294,9 @@ const EnergyAgendaScreen = () => {
                   return (
                     <div
                       key={index}
-                      className={`p-3 border ${isCurrentTask ? 'border-green-300 bg-green-900 bg-opacity-40' : 'border-green-600'} ${getTaskColor(task)}`}
+                      className={`border p-3 ${isCurrentTask ? 'bg-opacity-40 border-green-300 bg-green-900' : 'border-green-600'} ${getTaskColor(task)}`}
                     >
-                      <div className="flex justify-between items-center mb-2">
+                      <div className="mb-2 flex items-center justify-between">
                         <div className="flex items-center">
                           <div className="mr-3 font-bold text-green-300">
                             {task.time}
@@ -311,12 +311,12 @@ const EnergyAgendaScreen = () => {
                         </div>
                       </div>
                       <div className="mb-1 text-sm">{task.title}</div>
-                      <div className="text-green-600 text-xs">
+                      <div className="text-xs text-green-600">
                         REQ: {getEnergyBar(task.energy)} ({task.energy}/10) •{' '}
                         {task.priority} PRIORITY
                       </div>
                       {isCurrentTask && (
-                        <div className="mt-1 text-green-300 text-xs">
+                        <div className="mt-1 text-xs text-green-300">
                           ► ACTIVE NOW
                         </div>
                       )}
@@ -331,36 +331,36 @@ const EnergyAgendaScreen = () => {
         {/* Energy Insights */}
         <div className="mx-auto mb-8 max-w-4xl">
           <div className="mb-4 text-center">
-            <div className="text-green-500 text-base">
+            <div className="text-base text-green-500">
               ┌─────────────────────────────────────────────────────────┐
             </div>
-            <div className="text-green-500 text-base">│ ENERGY INSIGHTS │</div>
-            <div className="text-green-500 text-base">
+            <div className="text-base text-green-500">│ ENERGY INSIGHTS │</div>
+            <div className="text-base text-green-500">
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-3 text-center">
-            <div className="p-3 border border-green-600">
-              <div className="mb-1 text-green-300 text-sm">PEAK HOURS</div>
-              <div className="text-green-400 text-xs">09:00-11:00</div>
-              <div className="text-green-500 text-xs">████████ (9/10)</div>
+          <div className="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
+            <div className="border border-green-600 p-3">
+              <div className="mb-1 text-sm text-green-300">PEAK HOURS</div>
+              <div className="text-xs text-green-400">09:00-11:00</div>
+              <div className="text-xs text-green-500">████████ (9/10)</div>
             </div>
-            <div className="p-3 border border-green-600">
-              <div className="mb-1 text-green-300 text-sm">OPTIMAL TASKS</div>
-              <div className="text-green-400 text-xs">5 of 7 matched</div>
-              <div className="text-green-500 text-xs">71% efficiency</div>
+            <div className="border border-green-600 p-3">
+              <div className="mb-1 text-sm text-green-300">OPTIMAL TASKS</div>
+              <div className="text-xs text-green-400">5 of 7 matched</div>
+              <div className="text-xs text-green-500">71% efficiency</div>
             </div>
-            <div className="p-3 border border-green-600">
-              <div className="mb-1 text-green-300 text-sm">NEXT PEAK</div>
-              <div className="text-green-400 text-xs">Tomorrow 09:00</div>
-              <div className="text-green-500 text-xs">15h 23m away</div>
+            <div className="border border-green-600 p-3">
+              <div className="mb-1 text-sm text-green-300">NEXT PEAK</div>
+              <div className="text-xs text-green-400">Tomorrow 09:00</div>
+              <div className="text-xs text-green-500">15h 23m away</div>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
-          <div className="md:flex md:flex-row justify-center gap-8 grid">
+          <div className="grid justify-center gap-8 md:flex md:flex-row">
             <Button
               shortcut="[ESC]"
               text="Back"
@@ -380,7 +380,7 @@ const EnergyAgendaScreen = () => {
         </div>
 
         {/* Instructions */}
-        <div className="space-y-2 mb-4 text-green-600 text-xs text-center">
+        <div className="mb-4 space-y-2 text-center text-xs text-green-600">
           <div>┌─────────────────────────────────────────────────────────┐</div>
           <div>│ [←→] CHANGE DATE • [R] AUTO-RESCHEDULE • [T] ADD TASK │</div>
           <div>│ [ESC] BACK • [ENTER] WEEKLY VIEW • [D] DAY VIEW │</div>
@@ -396,7 +396,7 @@ const EnergyAgendaScreen = () => {
       </div>
 
       {/* Footer */}
-      <div className="right-4 bottom-4 left-4 mb-4 text-green-700 text-xs text-center">
+      <div className="right-4 bottom-4 left-4 mb-4 text-center text-xs text-green-700">
         <div>
           ───────────────────────────────────────────────────────────────
         </div>

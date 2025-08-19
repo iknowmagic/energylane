@@ -172,11 +172,11 @@ const InstantTaskSortScreen = () => {
   const topThreeTasks = sortedTasks.slice(0, 3)
 
   return (
-    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex min-h-screen flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
       {/* Scanlines effect */}
       <ScanLinesEffect />
 
-      <div className="z-10 relative p-4 w-full max-w-[800px]">
+      <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
@@ -186,8 +186,8 @@ const InstantTaskSortScreen = () => {
 
         {/* Current Energy Status */}
         <div className="mx-auto mb-8 max-w-4xl">
-          <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600 text-center">
-            <div className="mb-2 text-green-300 text-lg">
+          <div className="bg-opacity-20 border border-green-600 bg-green-900 p-4 text-center">
+            <div className="mb-2 text-lg text-green-300">
               CURRENT ENERGY: {currentMood.emoji} {currentMood.label}
             </div>
             <div className="text-green-400">
@@ -200,13 +200,13 @@ const InstantTaskSortScreen = () => {
         {/* Top 3 Recommended Tasks */}
         <div className="mx-auto mb-8 max-w-4xl">
           <div className="mb-4 text-center">
-            <div className="text-green-300 text-lg">
+            <div className="text-lg text-green-300">
               ┌─────────────────────────────────────────────────────────┐
             </div>
-            <div className="text-green-300 text-lg">
+            <div className="text-lg text-green-300">
               │ TOP 3 TASKS - DO THESE NOW │
             </div>
-            <div className="text-green-300 text-lg">
+            <div className="text-lg text-green-300">
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
@@ -217,20 +217,20 @@ const InstantTaskSortScreen = () => {
               return (
                 <div
                   key={task.id}
-                  className={`p-4 border-2 border-green-300 bg-green-900 bg-opacity-30 ${
+                  className={`bg-opacity-30 border-2 border-green-300 bg-green-900 p-4 ${
                     sortAnimation ? 'animate-pulse' : ''
                   }`}
                 >
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <div className="flex flex-1 items-center">
-                      <div className="mr-4 font-bold text-green-300 text-lg">
+                      <div className="mr-4 text-lg font-bold text-green-300">
                         ★ {index + 1}
                       </div>
                       <div className="flex-1">
-                        <div className="mb-1 text-green-300 text-base">
+                        <div className="mb-1 text-base text-green-300">
                           {task.title}
                         </div>
-                        <div className="text-green-500 text-xs">
+                        <div className="text-xs text-green-500">
                           {task.category} • {task.priority} PRIORITY • EST:{' '}
                           {task.timeEst}
                         </div>
@@ -238,11 +238,11 @@ const InstantTaskSortScreen = () => {
                     </div>
                     <div className="ml-4 text-right">
                       <div
-                        className={`font-bold text-sm ${getMatchColor(match)}`}
+                        className={`text-sm font-bold ${getMatchColor(match)}`}
                       >
                         [BEST NOW]
                       </div>
-                      <div className="text-green-600 text-xs">
+                      <div className="text-xs text-green-600">
                         REQ: {getEnergyBar(task.energyRequired)} (
                         {task.energyRequired}/10)
                       </div>
@@ -257,13 +257,13 @@ const InstantTaskSortScreen = () => {
         {/* All Tasks List */}
         <div className="mx-auto mb-8 max-w-4xl">
           <div className="mb-4 text-center">
-            <div className="text-green-600 text-base">
+            <div className="text-base text-green-600">
               ┌─────────────────────────────────────────────────────────┐
             </div>
-            <div className="text-green-600 text-base">
+            <div className="text-base text-green-600">
               │ ALL TASKS (SORTED) │
             </div>
-            <div className="text-green-600 text-base">
+            <div className="text-base text-green-600">
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
@@ -274,16 +274,16 @@ const InstantTaskSortScreen = () => {
               return (
                 <div
                   key={task.id}
-                  className="hover:bg-green-900 hover:bg-opacity-20 p-3 border border-green-600 transition-colors duration-200"
+                  className="hover:bg-opacity-20 border border-green-600 p-3 transition-colors duration-200 hover:bg-green-900"
                 >
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <div className="flex flex-1 items-center">
                       <div className="mr-4 text-green-500">[{index + 4}]</div>
                       <div className="flex-1">
-                        <div className="mb-1 text-green-400 text-sm">
+                        <div className="mb-1 text-sm text-green-400">
                           {task.title}
                         </div>
-                        <div className="text-green-600 text-xs">
+                        <div className="text-xs text-green-600">
                           {task.category} • {task.priority} • {task.timeEst}
                         </div>
                       </div>
@@ -292,7 +292,7 @@ const InstantTaskSortScreen = () => {
                       <div className={`text-xs ${getMatchColor(match)}`}>
                         {match} MATCH
                       </div>
-                      <div className="text-green-700 text-xs">
+                      <div className="text-xs text-green-700">
                         {getEnergyBar(task.energyRequired)} (
                         {task.energyRequired}/10)
                       </div>
@@ -306,7 +306,7 @@ const InstantTaskSortScreen = () => {
 
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
-          <div className="md:flex md:flex-row justify-center gap-8 grid">
+          <div className="grid justify-center gap-8 md:flex md:flex-row">
             <Button
               shortcut="[ESC]"
               text="Back"
@@ -326,7 +326,7 @@ const InstantTaskSortScreen = () => {
         </div>
 
         {/* Instructions */}
-        <div className="space-y-2 text-green-600 text-xs text-center">
+        <div className="space-y-2 text-center text-xs text-green-600">
           <div>┌─────────────────────────────────────────────────────────┐</div>
           <div>│ [1-8] SELECT TASK • [R] REFRESH • [ENTER] NEXT MODULE │</div>
           <div>│ [ESC] BACK • [SPACE] MARK COMPLETE │</div>
@@ -344,7 +344,7 @@ const InstantTaskSortScreen = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 text-center text-xs text-green-700">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>

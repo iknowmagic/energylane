@@ -109,11 +109,11 @@ const MoodCheckIn = () => {
   }
 
   return (
-    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex min-h-screen flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
       {/* Scanlines effect */}
       <ScanLinesEffect />
 
-      <div className="z-10 relative p-4 w-full max-w-[800px]">
+      <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
@@ -123,26 +123,26 @@ const MoodCheckIn = () => {
 
         {/* Mood Selection Grid */}
         <div className="mx-auto mb-8 max-w-4xl">
-          <div className="gap-4 grid grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
             {moods.map((mood, index) => (
               <button
                 key={mood.id}
                 onClick={() => handleMoodSelect(mood)}
-                className={`p-4 border-2 transition-all duration-200 ${
+                className={`border-2 p-4 transition-all duration-200 ${
                   selectedMood?.id === mood.id
-                    ? 'border-green-300 bg-green-900 bg-opacity-30'
-                    : 'border-green-600 hover:border-green-400 hover:bg-green-900 hover:bg-opacity-20'
+                    ? 'bg-opacity-30 border-green-300 bg-green-900'
+                    : 'hover:bg-opacity-20 border-green-600 hover:border-green-400 hover:bg-green-900'
                 }`}
               >
                 <div className="text-center">
                   <div className="mb-2 text-3xl">{mood.emoji}</div>
-                  <div className="mb-1 font-bold text-green-300 text-xs">
+                  <div className="mb-1 text-xs font-bold text-green-300">
                     [{index + 1}] {mood.label}
                   </div>
-                  <div className="mb-2 text-green-600 text-xs">
+                  <div className="mb-2 text-xs text-green-600">
                     {mood.description}
                   </div>
-                  <div className="text-green-500 text-xs">
+                  <div className="text-xs text-green-500">
                     ENERGY: {getEnergyBar(mood.energy)} ({mood.energy}/10)
                   </div>
                 </div>
@@ -164,13 +164,13 @@ const MoodCheckIn = () => {
               </div>
 
               <div className="mb-2 text-4xl">{selectedMood.emoji}</div>
-              <div className="mb-2 text-green-300 text-lg">
+              <div className="mb-2 text-lg text-green-300">
                 {selectedMood.label}
               </div>
               <div className="mb-2 text-green-500">
                 {selectedMood.description}
               </div>
-              <div className="text-green-400 text-sm">
+              <div className="text-sm text-green-400">
                 ENERGY LEVEL: {getEnergyBar(selectedMood.energy)} (
                 {selectedMood.energy}/10)
               </div>
@@ -180,7 +180,7 @@ const MoodCheckIn = () => {
 
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
-          <div className="md:flex md:flex-row justify-center gap-8 grid">
+          <div className="grid justify-center gap-8 md:flex md:flex-row">
             <Button
               shortcut="[ESC]"
               text="Back to Menu"
@@ -196,7 +196,7 @@ const MoodCheckIn = () => {
         </div>
 
         {/* Instructions */}
-        <div className="space-y-2 text-green-600 text-xs text-center">
+        <div className="space-y-2 text-center text-xs text-green-600">
           <div>┌─────────────────────────────────────────────────────────┐</div>
           <div>│ PRESS [1-6] TO SELECT MOOD • [ENTER] TO CONFIRM │</div>
           <div>│ [ESC] BACK TO MENU • [TAB] CYCLE THROUGH OPTIONS │</div>
@@ -214,7 +214,7 @@ const MoodCheckIn = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 text-center text-xs text-green-700">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>

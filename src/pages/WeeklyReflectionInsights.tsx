@@ -7,12 +7,12 @@ import SystemInfo from '../components/SystemInfo'
 
 // Exported interfaces for type safety
 export interface WeeklyData {
-  days: string[]
-  energyLevels: number[]
-  lowEnergyTasks: number[]
-  highEnergyTasks: number[]
-  totalLowTasks: number[]
-  totalHighTasks: number[]
+  days: Array<string>
+  energyLevels: Array<number>
+  lowEnergyTasks: Array<number>
+  highEnergyTasks: Array<number>
+  totalLowTasks: Array<number>
+  totalHighTasks: Array<number>
 }
 
 export interface ReflectionAnswers {
@@ -109,51 +109,51 @@ const WeeklyInsightsScreen = () => {
   }
 
   return (
-    <div className="flex flex-col items-center bg-black min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex min-h-screen flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
       {/* Scanlines effect */}
       <ScanLinesEffect />
 
-      <div className="z-10 relative p-4 w-full max-w-[800px]">
+      <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
         <SectionHeader title="WEEKLY REFLECTION & INSIGHTS">
-          <div className="mb-2 text-green-500 text-sm">
+          <div className="mb-2 text-sm text-green-500">
             WEEK OF {currentWeek}
           </div>
-          <div className="mb-4 text-green-500 text-xs">
+          <div className="mb-4 text-xs text-green-500">
             ANALYZE PATTERNS • IDENTIFY IMPROVEMENTS • PLAN AHEAD
           </div>
         </SectionHeader>
 
         {/* Weekly Overview Stats */}
         <div className="mx-auto mb-8 max-w-6xl">
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-4 text-center">
-            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
-              <div className="mb-2 text-green-300 text-lg">
+          <div className="grid grid-cols-1 gap-4 text-center md:grid-cols-4">
+            <div className="bg-opacity-20 border border-green-600 bg-green-900 p-4">
+              <div className="mb-2 text-lg text-green-300">
                 {lowEnergyCompletion}%
               </div>
-              <div className="text-green-500 text-xs">LOW-ENERGY TASKS</div>
-              <div className="mt-1 text-green-600 text-xs">27/34 completed</div>
+              <div className="text-xs text-green-500">LOW-ENERGY TASKS</div>
+              <div className="mt-1 text-xs text-green-600">27/34 completed</div>
             </div>
-            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
-              <div className="mb-2 text-green-300 text-lg">
+            <div className="bg-opacity-20 border border-green-600 bg-green-900 p-4">
+              <div className="mb-2 text-lg text-green-300">
                 {highEnergyCompletion}%
               </div>
-              <div className="text-green-500 text-xs">HIGH-ENERGY TASKS</div>
-              <div className="mt-1 text-green-600 text-xs">14/25 completed</div>
+              <div className="text-xs text-green-500">HIGH-ENERGY TASKS</div>
+              <div className="mt-1 text-xs text-green-600">14/25 completed</div>
             </div>
-            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
-              <div className="mb-2 text-green-300 text-lg">6.7</div>
-              <div className="text-green-500 text-xs">AVG ENERGY LEVEL</div>
-              <div className="mt-1 text-green-600 text-xs">
+            <div className="bg-opacity-20 border border-green-600 bg-green-900 p-4">
+              <div className="mb-2 text-lg text-green-300">6.7</div>
+              <div className="text-xs text-green-500">AVG ENERGY LEVEL</div>
+              <div className="mt-1 text-xs text-green-600">
                 Good week overall
               </div>
             </div>
-            <div className="bg-green-900 bg-opacity-20 p-4 border border-green-600">
-              <div className="mb-2 text-green-300 text-lg">4</div>
-              <div className="text-green-500 text-xs">PEAK ENERGY DAYS</div>
-              <div className="mt-1 text-green-600 text-xs">
+            <div className="bg-opacity-20 border border-green-600 bg-green-900 p-4">
+              <div className="mb-2 text-lg text-green-300">4</div>
+              <div className="text-xs text-green-500">PEAK ENERGY DAYS</div>
+              <div className="mt-1 text-xs text-green-600">
                 Thu-Fri strongest
               </div>
             </div>
@@ -162,17 +162,17 @@ const WeeklyInsightsScreen = () => {
 
         {/* Weekly Charts */}
         <div className="mx-auto mb-8 max-w-6xl">
-          <div className="gap-8 grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {/* Energy Levels Chart */}
             <div>
               <div className="mb-4 text-center">
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   ┌─────────────────────────────────────┐
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   │ DAILY ENERGY LEVELS │
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   └─────────────────────────────────────┘
                 </div>
               </div>
@@ -181,9 +181,9 @@ const WeeklyInsightsScreen = () => {
                 {weeklyData.days.map((day, index) => (
                   <div
                     key={day}
-                    className="flex items-center p-2 border border-green-600"
+                    className="flex items-center border border-green-600 p-2"
                   >
-                    <div className="mr-4 w-8 text-green-300 text-center">
+                    <div className="mr-4 w-8 text-center text-green-300">
                       {day}
                     </div>
                     <div className="flex-1">
@@ -191,7 +191,7 @@ const WeeklyInsightsScreen = () => {
                         <div className="mr-3 w-20">
                           {getEnergyBar(weeklyData.energyLevels[index])}
                         </div>
-                        <div className="text-green-400 text-xs">
+                        <div className="text-xs text-green-400">
                           {weeklyData.energyLevels[index]}/10
                         </div>
                       </div>
@@ -204,23 +204,23 @@ const WeeklyInsightsScreen = () => {
             {/* Task Completion Chart */}
             <div>
               <div className="mb-4 text-center">
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   ┌─────────────────────────────────────┐
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   │ TASK COMPLETION RATES │
                 </div>
-                <div className="text-green-300 text-base">
+                <div className="text-base text-green-300">
                   └─────────────────────────────────────┘
                 </div>
               </div>
 
               <div className="space-y-3">
                 {weeklyData.days.map((day, index) => (
-                  <div key={day} className="p-2 border border-green-600">
-                    <div className="flex justify-between items-center mb-2">
+                  <div key={day} className="border border-green-600 p-2">
+                    <div className="mb-2 flex items-center justify-between">
                       <div className="font-bold text-green-300">{day}</div>
-                      <div className="text-green-600 text-xs">
+                      <div className="text-xs text-green-600">
                         {weeklyData.lowEnergyTasks[index] +
                           weeklyData.highEnergyTasks[index]}
                         /
@@ -267,11 +267,11 @@ const WeeklyInsightsScreen = () => {
         {/* Key Insights */}
         <div className="mx-auto mb-8 max-w-4xl">
           <div className="mb-4 text-center">
-            <div className="text-green-300 text-base">
+            <div className="text-base text-green-300">
               ┌─────────────────────────────────────────────────────────┐
             </div>
-            <div className="text-green-300 text-base">│ KEY INSIGHTS │</div>
-            <div className="text-green-300 text-base">
+            <div className="text-base text-green-300">│ KEY INSIGHTS │</div>
+            <div className="text-base text-green-300">
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
@@ -280,11 +280,11 @@ const WeeklyInsightsScreen = () => {
             {insights.map((insight, index) => (
               <div
                 key={index}
-                className="bg-green-900 bg-opacity-10 p-3 border border-green-600"
+                className="bg-opacity-10 border border-green-600 bg-green-900 p-3"
               >
                 <div className="flex items-start">
                   <div className="mr-3 text-green-300">►</div>
-                  <div className="text-green-400 text-sm">{insight}</div>
+                  <div className="text-sm text-green-400">{insight}</div>
                 </div>
               </div>
             ))}
@@ -294,19 +294,19 @@ const WeeklyInsightsScreen = () => {
         {/* Reflection Questions */}
         <div className="mx-auto mb-8 max-w-4xl">
           <div className="mb-4 text-center">
-            <div className="text-green-300 text-base">
+            <div className="text-base text-green-300">
               ┌─────────────────────────────────────────────────────────┐
             </div>
-            <div className="text-green-300 text-base">
+            <div className="text-base text-green-300">
               │ WEEKLY REFLECTION │
             </div>
-            <div className="text-green-300 text-base">
+            <div className="text-base text-green-300">
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
 
           <div className="space-y-6">
-            <div className="p-4 border border-green-600">
+            <div className="border border-green-600 p-4">
               <div className="mb-3 text-green-300">
                 [1] What blocked high-energy tasks this week?
               </div>
@@ -316,16 +316,16 @@ const WeeklyInsightsScreen = () => {
                   handleReflectionChange('blockers', e.target.value)
                 }
                 placeholder="Type your reflection here..."
-                className="bg-black p-2 border border-green-700 focus:border-green-500 focus:outline-none w-full h-20 font-mono text-green-400 text-sm resize-none"
+                className="h-20 w-full resize-none border border-green-700 bg-black p-2 font-mono text-sm text-green-400 focus:border-green-500 focus:outline-none"
                 style={{ backgroundColor: '#000', color: '#4ade80' }}
               />
-              <div className="mt-2 text-green-600 text-xs">
+              <div className="mt-2 text-xs text-green-600">
                 Examples: meetings during peak hours, energy dips after lunch,
                 distractions...
               </div>
             </div>
 
-            <div className="p-4 border border-green-600">
+            <div className="border border-green-600 p-4">
               <div className="mb-3 text-green-300">
                 [2] One change for next week?
               </div>
@@ -335,10 +335,10 @@ const WeeklyInsightsScreen = () => {
                   handleReflectionChange('change', e.target.value)
                 }
                 placeholder="Type your actionable change here..."
-                className="bg-black p-2 border border-green-700 focus:border-green-500 focus:outline-none w-full h-20 font-mono text-green-400 text-sm resize-none"
+                className="h-20 w-full resize-none border border-green-700 bg-black p-2 font-mono text-sm text-green-400 focus:border-green-500 focus:outline-none"
                 style={{ backgroundColor: '#000', color: '#4ade80' }}
               />
-              <div className="mt-2 text-green-600 text-xs">
+              <div className="mt-2 text-xs text-green-600">
                 Keep it simple and specific. What's one small adjustment to try?
               </div>
             </div>
@@ -348,38 +348,38 @@ const WeeklyInsightsScreen = () => {
         {/* Recommendations */}
         <div className="mx-auto mb-8 max-w-4xl">
           <div className="mb-4 text-center">
-            <div className="text-green-500 text-base">
+            <div className="text-base text-green-500">
               ┌─────────────────────────────────────────────────────────┐
             </div>
-            <div className="text-green-500 text-base">
+            <div className="text-base text-green-500">
               │ RECOMMENDATIONS FOR NEXT WEEK │
             </div>
-            <div className="text-green-500 text-base">
+            <div className="text-base text-green-500">
               └─────────────────────────────────────────────────────────┘
             </div>
           </div>
 
-          <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
-            <div className="p-4 border border-green-600">
-              <div className="mb-2 text-green-300 text-sm">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="border border-green-600 p-4">
+              <div className="mb-2 text-sm text-green-300">
                 ⚡ ENERGY OPTIMIZATION
               </div>
-              <div className="mb-2 text-green-400 text-xs">
+              <div className="mb-2 text-xs text-green-400">
                 Schedule 2-3 high-energy tasks for Tuesday-Thursday when you're
                 strongest
               </div>
-              <div className="text-green-600 text-xs">
+              <div className="text-xs text-green-600">
                 Current sweet spot: 9-11 AM on peak days
               </div>
             </div>
-            <div className="p-4 border border-green-600">
-              <div className="mb-2 text-green-300 text-sm">
+            <div className="border border-green-600 p-4">
+              <div className="mb-2 text-sm text-green-300">
                 📋 TASK BALANCING
               </div>
-              <div className="mb-2 text-green-400 text-xs">
+              <div className="mb-2 text-xs text-green-400">
                 Add more low-energy buffer tasks for Wednesday recovery
               </div>
-              <div className="text-green-600 text-xs">
+              <div className="text-xs text-green-600">
                 Target: 6-8 easy tasks for energy dip days
               </div>
             </div>
@@ -408,7 +408,7 @@ const WeeklyInsightsScreen = () => {
         </div>
 
         {/* Instructions */}
-        <div className="space-y-2 mb-4 text-green-600 text-xs text-center">
+        <div className="mb-4 space-y-2 text-center text-xs text-green-600">
           <div>┌─────────────────────────────────────────────────────────┐</div>
           <div>│ [TAB] NAVIGATE FIELDS • [S] SAVE • [P] PRINT REPORT │</div>
           <div>│ [ESC] BACK • [ENTER] CONTINUE • [←→] PREV WEEK │</div>
@@ -424,7 +424,7 @@ const WeeklyInsightsScreen = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 mb-4 text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 mb-4 text-center text-xs text-green-700">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>

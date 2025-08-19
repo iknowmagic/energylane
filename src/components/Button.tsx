@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`px-6 py-3 border transition-colors duration-200 flex items-center justify-center gap-2 uppercase font-mono text-sm ${disabled ? 'border-green-700 text-green-700 cursor-not-allowed' : 'border-green-300 text-green-300 hover:bg-green-900 hover:bg-opacity-30'} ${className || ''}`}
+    className={`flex items-center justify-center gap-2 border px-6 py-3 font-mono text-sm uppercase transition-colors duration-200 ${disabled ? 'cursor-not-allowed border-green-700 text-green-700' : 'hover:bg-opacity-30 border-green-300 text-green-300 hover:bg-green-900'} ${className || ''}`}
   >
     <span className="font-bold">{shortcut.toUpperCase()}</span>
     <span>{text.toUpperCase()}</span>

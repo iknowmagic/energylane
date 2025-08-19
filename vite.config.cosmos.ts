@@ -11,12 +11,12 @@ export default defineConfig({
     tailwindcss(),
     tsconfigPaths({
       projects: [path.resolve(__dirname, './tsconfig.json')],
-      root: path.resolve(__dirname, './')
-    })
+      root: path.resolve(__dirname, './'),
+    }),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(path.dirname(fileURLToPath(import.meta.url)), './src')
-    }
-  }
+      '@': path.resolve(path.dirname(fileURLToPath(import.meta.url)), './src'),
+    },
+  },
 })

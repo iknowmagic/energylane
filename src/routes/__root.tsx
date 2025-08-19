@@ -1,5 +1,5 @@
-import ColorFilter from '@/components/ColorFilter'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
+import ColorFilter from '@/components/ColorFilter'
 
 export const Route = createRootRoute({
   component: () => (

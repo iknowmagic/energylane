@@ -32,16 +32,16 @@ const MoodTaskManager = () => {
     })
 
   return (
-    <div className="flex flex-col items-center bg-black w-full min-h-screen overflow-hidden font-mono text-green-400 text-sm leading-relaxed">
+    <div className="flex min-h-screen w-full flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
       {/* Scanlines effect */}
       <ScanLinesEffect />
 
-      <div className="z-10 relative p-4 w-full max-w-[760px]">
+      <div className="relative z-10 w-full max-w-[760px] p-4">
         {/* Header */}
         <Hero />
 
         {/* System Info */}
-        <div className="grid grid-cols-3 mb-8 text-green-500 text-xs text-center">
+        <div className="mb-8 grid grid-cols-3 text-center text-xs text-green-500">
           <div>SYSTEM TIME: {formatTime(currentTime)}</div>
           <div>MEMORY: 640K OK</div>
           <div>USER: ILAN_KAIM</div>
@@ -51,18 +51,18 @@ const MoodTaskManager = () => {
         <div className="mx-auto w-full">
           <MainHeader title="MAIN MENU" />
 
-          <div className="flex flex-col gap-4 mb-6">
+          <div className="mb-6 flex flex-col gap-4">
             <Link
               to="/mood-check-in"
-              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[1]</span>
                 <div className="flex-1">
-                  <div className="text-green-400 group-hover:text-green-200 text-base tracking-wide">
+                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
                     ► MOOD CHECK-IN
                   </div>
-                  <div className="mt-1 text-green-600 text-xs">
+                  <div className="mt-1 text-xs text-green-600">
                     Single emoji dial logs current emotional state for
                     context-aware task suggestions
                   </div>
@@ -73,15 +73,15 @@ const MoodTaskManager = () => {
 
             <Link
               to="/instant-task-sort"
-              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[2]</span>
                 <div className="flex-1">
-                  <div className="text-green-400 group-hover:text-green-200 text-base tracking-wide">
+                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
                     ► INSTANT TASK SORT
                   </div>
-                  <div className="mt-1 text-green-600 text-xs">
+                  <div className="mt-1 text-xs text-green-600">
                     Auto-reshuffle top three tasks to match current energy. Zero
                     extra taps required
                   </div>
@@ -92,15 +92,15 @@ const MoodTaskManager = () => {
 
             <Link
               to="/energy-aware-agenda"
-              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[3]</span>
                 <div className="flex-1">
-                  <div className="text-green-400 group-hover:text-green-200 text-base tracking-wide">
+                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
                     ► ENERGY-AWARE AGENDA
                   </div>
-                  <div className="mt-1 text-green-600 text-xs">
+                  <div className="mt-1 text-xs text-green-600">
                     Peak hours highlighted. Deep-work tasks auto-scheduled for
                     high-energy blocks
                   </div>
@@ -111,15 +111,15 @@ const MoodTaskManager = () => {
 
             <Link
               to="/weekly-reflection-insights"
-              className="group block hover:bg-green-900 hover:bg-opacity-30 p-3 border border-green-600 w-full text-left transition-colors duration-200"
+              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
             >
               <div className="flex items-center">
                 <span className="mr-4 font-bold text-green-300">[4]</span>
                 <div className="flex-1">
-                  <div className="text-green-400 group-hover:text-green-200 text-base tracking-wide">
+                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
                     ► WEEKLY REFLECTION & INSIGHTS
                   </div>
-                  <div className="mt-1 text-green-600 text-xs">
+                  <div className="mt-1 text-xs text-green-600">
                     Quick chart and prompts capture trends plus one actionable
                     tweak per week
                   </div>
@@ -130,7 +130,7 @@ const MoodTaskManager = () => {
           </div>
 
           {/* Instructions */}
-          <div className="space-y-2 text-green-600 text-xs text-center">
+          <div className="space-y-2 text-center text-xs text-green-600">
             <div>
               ┌─────────────────────────────────────────────────────────┐
             </div>
@@ -150,7 +150,7 @@ const MoodTaskManager = () => {
         </div>
 
         {/* Footer */}
-        <div className="right-4 bottom-4 left-4 text-green-700 text-xs text-center">
+        <div className="right-4 bottom-4 left-4 text-center text-xs text-green-700">
           <div>
             ───────────────────────────────────────────────────────────────
           </div>
