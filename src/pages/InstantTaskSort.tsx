@@ -306,7 +306,7 @@ const InstantTaskSortScreen = () => {
 
         {/* Action Buttons */}
         <div className="mx-auto mb-8 max-w-2xl">
-          <div className="flex justify-center space-x-8">
+          <div className="md:flex md:flex-row justify-center gap-8 grid">
             <Button
               shortcut="[ESC]"
               text="Back"
