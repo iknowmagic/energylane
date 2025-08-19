@@ -1,27 +1,20 @@
 import { MenuItem } from '@/components/MenuItem'
-import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import BlinkingCursor from '../components/BlinkingCursor'
 import Hero from '../components/Hero'
 import MainHeader from '../components/MainHeader'
 import ScanLinesEffect from '../components/ScanLinesEffect'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [blinkingCursor, setBlinkingCursor] = useState(true)
-  const navigate = useNavigate()
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
 
-    const blinkTimer = setInterval(() => {
-      setBlinkingCursor((prev) => !prev)
-    }, 800)
-
     return () => {
       clearInterval(timer)
-      clearInterval(blinkTimer)
     }
   }, [])
 
@@ -105,9 +98,7 @@ const MoodTaskManager = () => {
 
           {/* Blinking cursor */}
           <div className="mt-4 text-center">
-            <span className="text-green-400">
-              READY{blinkingCursor ? '█' : ' '}
-            </span>
+            <BlinkingCursor text="READY" />
           </div>
         </div>
 
