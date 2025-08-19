@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Button from '../components/Button'
 import ScanLinesEffect from '../components/ScanLinesEffect'
 import SectionHeader from '../components/SectionHeader'
@@ -26,8 +26,7 @@ export type GetCompletionBarFn = (completed: number, total: number) => string
 export type HandleReflectionChangeFn = (field: string, value: string) => void
 
 const WeeklyInsightsScreen = () => {
-  const [currentTime, setCurrentTime] = useState(new Date())
-  const [blinkingCursor, setBlinkingCursor] = useState(true)
+  // Removed unused currentTime state
   const navigate = useNavigate()
   const [currentWeek] = useState('AUG 11-17, 2025')
   const [reflectionAnswers, setReflectionAnswers] = useState({
@@ -65,29 +64,9 @@ const WeeklyInsightsScreen = () => {
     'Best momentum: Tuesday-Thursday with consistent 7+ energy levels',
   ]
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
+  // Removed unused time/blinking effect
 
-    const blinkTimer = setInterval(() => {
-      setBlinkingCursor((prev) => !prev)
-    }, 800)
-
-    return () => {
-      clearInterval(timer)
-      clearInterval(blinkTimer)
-    }
-  }, [])
-
-  const formatTime: FormatTimeFn = (date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
-  }
+  // Removed unused formatTime function
 
   const getEnergyBar: GetEnergyBarFn = (energy) => {
     const bars = Math.floor(energy / 2)
@@ -115,7 +94,7 @@ const WeeklyInsightsScreen = () => {
 
       <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
-        <SystemInfo currentTime={currentTime} formatTime={formatTime} />
+        <SystemInfo />
 
         <SectionHeader title="WEEKLY REFLECTION & INSIGHTS">
           <div className="mb-2 text-sm text-green-500">
@@ -419,7 +398,7 @@ const WeeklyInsightsScreen = () => {
         <div className="mt-4 text-center">
           <span className="text-green-400">
             WEEKLY ANALYSIS COMPLETE • READY FOR NEXT WEEK
-            {blinkingCursor ? '█' : ' '}
+            {/* Removed blinkingCursor reference */}
           </span>
         </div>
 

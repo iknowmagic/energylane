@@ -22,7 +22,6 @@ export interface Mood {
 }
 
 const InstantTaskSortScreen = () => {
-  const [currentTime, setCurrentTime] = useState(new Date())
   const navigate = useNavigate()
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 }) // Would come from previous screen
   const [sortAnimation, setSortAnimation] = useState(false)
@@ -96,26 +95,13 @@ const InstantTaskSortScreen = () => {
   ])
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
     // Trigger sort animation on load
     setSortAnimation(true)
     const animTimer = setTimeout(() => setSortAnimation(false), 1500)
     return () => {
-      clearInterval(timer)
       clearTimeout(animTimer)
     }
   }, [])
-
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
-  }
 
   // Sort tasks based on energy match (closer to current energy = higher priority)
   const sortedTasks = [...tasks].sort((a, b) => {
@@ -171,7 +157,7 @@ const InstantTaskSortScreen = () => {
 
       <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
-        <SystemInfo currentTime={currentTime} formatTime={formatTime} />
+        <SystemInfo />
 
         <SectionHeader title="INSTANT TASK SORT">
           TASKS AUTO-SORTED FOR YOUR CURRENT ENERGY STATE

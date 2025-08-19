@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import BlinkingCursor from '../components/BlinkingCursor'
 import Button from '../components/Button'
 import ScanLinesEffect from '../components/ScanLinesEffect'
@@ -34,7 +34,6 @@ export interface GetTaskColorProps {
 }
 
 const EnergyAgendaScreen = () => {
-  const [currentTime, setCurrentTime] = useState(new Date())
   const navigate = useNavigate()
   const [selectedDate] = useState(new Date(2025, 7, 17)) // August 17, 2025
   const [currentMood] = useState({ emoji: '😊', label: 'ENERGIZED', energy: 9 })
@@ -120,24 +119,6 @@ const EnergyAgendaScreen = () => {
     },
   ]
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
-
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
-  }
-
   const formatDate = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = {
       weekday: 'long',
@@ -180,7 +161,7 @@ const EnergyAgendaScreen = () => {
   }
 
   const timeSlots = Object.keys(energyPattern)
-  const currentHour = currentTime.getHours()
+  const currentHour = new Date().getHours()
 
   return (
     <div className="flex min-h-screen flex-col items-center overflow-hidden bg-black font-mono text-sm leading-relaxed text-green-400">
@@ -189,7 +170,7 @@ const EnergyAgendaScreen = () => {
 
       <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
-        <SystemInfo currentTime={currentTime} formatTime={formatTime} />
+        <SystemInfo />
 
         <SectionHeader title="ENERGY-AWARE AGENDA">
           <div className="mb-2 text-sm text-green-500">

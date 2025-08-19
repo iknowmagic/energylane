@@ -1,5 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import BlinkingCursor from '../components/BlinkingCursor'
 import Button from '../components/Button'
 import ScanLinesEffect from '../components/ScanLinesEffect'
@@ -15,7 +15,6 @@ export interface Mood {
 }
 
 const MoodCheckIn = () => {
-  const [currentTime, setCurrentTime] = useState(new Date())
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null)
   const navigate = useNavigate()
 
@@ -64,24 +63,6 @@ const MoodCheckIn = () => {
     },
   ]
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 1000)
-    return () => {
-      clearInterval(timer)
-    }
-  }, [])
-
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
-  }
-
   const handleMoodSelect = (mood: Mood) => {
     setSelectedMood(mood)
   }
@@ -109,7 +90,7 @@ const MoodCheckIn = () => {
 
       <div className="relative z-10 w-full max-w-[800px] p-4">
         {/* Header */}
-        <SystemInfo currentTime={currentTime} formatTime={formatTime} />
+        <SystemInfo />
 
         <SectionHeader title="MOOD CHECK-IN">
           SELECT YOUR CURRENT ENERGY STATE FOR OPTIMAL TASK MATCHING
