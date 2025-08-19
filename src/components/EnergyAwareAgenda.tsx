@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SystemInfo from './SystemInfo'
 
 export interface Mood {
   emoji: string
@@ -189,11 +190,7 @@ const EnergyAgendaScreen = () => {
 
       <div className="z-10 relative p-4 w-full max-w-[800px]">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 text-xs">
-          <div className="text-green-500">ENERGYLANE v1.0</div>
-          <div className="text-green-500">TIME: {formatTime(currentTime)}</div>
-          <div className="text-green-500">USER: ILAN_KAIM</div>
-        </div>
+        <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
         <div className="mb-8 text-center">
           <div className="mb-4 text-green-300">

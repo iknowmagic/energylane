@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SystemInfo from './SystemInfo'
 
 export interface Task {
   id: number
@@ -172,11 +173,7 @@ const InstantTaskSortScreen = () => {
 
       <div className="z-10 relative p-4 w-full max-w-[800px]">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 text-xs">
-          <div className="text-green-500">ENERGYLANE v1.0</div>
-          <div className="text-green-500">TIME: {formatTime(currentTime)}</div>
-          <div className="text-green-500">USER: ILAN_KAIM</div>
-        </div>
+        <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
         <div className="mb-8 text-center">
           <div className="mb-4 text-green-300">
@@ -197,13 +194,6 @@ const InstantTaskSortScreen = () => {
           <div className="text-green-300">
             ════════════════════════════════════════════════════════════════
           </div>
-        </div>
-
-        {/* System Info */}
-        <div className="grid grid-cols-3 mb-8 text-green-500 text-xs text-center">
-          <div>TIME: {formatTime(currentTime)}</div>
-          <div>ENERGYLANE</div>
-          <div>USER: ILAN_KAIM</div>
         </div>
 
         {/* Current Energy Status */}
