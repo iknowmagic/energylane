@@ -1,4 +1,5 @@
-import { Link } from '@tanstack/react-router'
+import { MenuItem } from '@/components/MenuItem'
+import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import Hero from '../components/Hero'
 import MainHeader from '../components/MainHeader'
@@ -7,6 +8,7 @@ import ScanLinesEffect from '../components/ScanLinesEffect'
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [blinkingCursor, setBlinkingCursor] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -52,81 +54,41 @@ const MoodTaskManager = () => {
           <MainHeader title="MAIN MENU" />
 
           <div className="mb-6 flex flex-col gap-4">
-            <Link
-              to="/mood-check-in"
-              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
+            <MenuItem
+              location="/mood-check-in"
+              number={1}
+              title="MOOD CHECK-IN"
+              description="Single emoji dial logs current emotional state for context-aware task suggestions"
             >
-              <div className="flex items-center">
-                <span className="mr-4 font-bold text-green-300">[1]</span>
-                <div className="flex-1">
-                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
-                    ► MOOD CHECK-IN
-                  </div>
-                  <div className="mt-1 text-xs text-green-600">
-                    Single emoji dial logs current emotional state for
-                    context-aware task suggestions
-                  </div>
-                </div>
-                <div className="ml-4 text-green-600">😊 ⚡ 😴</div>
-              </div>
-            </Link>
+              😊 ⚡ 😴
+            </MenuItem>
 
-            <Link
-              to="/instant-task-sort"
-              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
+            <MenuItem
+              location="/instant-task-sort"
+              number={2}
+              title="INSTANT TASK SORT"
+              description="Auto-reshuffle top three tasks to match current energy. Zero extra taps required"
             >
-              <div className="flex items-center">
-                <span className="mr-4 font-bold text-green-300">[2]</span>
-                <div className="flex-1">
-                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
-                    ► INSTANT TASK SORT
-                  </div>
-                  <div className="mt-1 text-xs text-green-600">
-                    Auto-reshuffle top three tasks to match current energy. Zero
-                    extra taps required
-                  </div>
-                </div>
-                <div className="ml-4 text-green-600">★★★</div>
-              </div>
-            </Link>
+              ★★★
+            </MenuItem>
 
-            <Link
-              to="/energy-aware-agenda"
-              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
+            <MenuItem
+              location="/energy-aware-agenda"
+              number={3}
+              title="ENERGY-AWARE AGENDA"
+              description="Peak hours highlighted. Deep-work tasks auto-scheduled for high-energy blocks"
             >
-              <div className="flex items-center">
-                <span className="mr-4 font-bold text-green-300">[3]</span>
-                <div className="flex-1">
-                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
-                    ► ENERGY-AWARE AGENDA
-                  </div>
-                  <div className="mt-1 text-xs text-green-600">
-                    Peak hours highlighted. Deep-work tasks auto-scheduled for
-                    high-energy blocks
-                  </div>
-                </div>
-                <div className="ml-4 text-green-600">████</div>
-              </div>
-            </Link>
+              ████
+            </MenuItem>
 
-            <Link
-              to="/weekly-reflection-insights"
-              className="group hover:bg-opacity-30 block w-full border border-green-600 p-3 text-left transition-colors duration-200 hover:bg-green-900"
+            <MenuItem
+              location="/weekly-reflection-insights"
+              number={4}
+              title="WEEKLY REFLECTION & INSIGHTS"
+              description="Quick chart and prompts capture trends plus one actionable tweak per week"
             >
-              <div className="flex items-center">
-                <span className="mr-4 font-bold text-green-300">[4]</span>
-                <div className="flex-1">
-                  <div className="text-base tracking-wide text-green-400 group-hover:text-green-200">
-                    ► WEEKLY REFLECTION & INSIGHTS
-                  </div>
-                  <div className="mt-1 text-xs text-green-600">
-                    Quick chart and prompts capture trends plus one actionable
-                    tweak per week
-                  </div>
-                </div>
-                <div className="ml-4 text-green-600">▆▆█</div>
-              </div>
-            </Link>
+              ▆▆█
+            </MenuItem>
           </div>
 
           {/* Instructions */}
