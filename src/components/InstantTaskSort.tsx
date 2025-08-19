@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SectionHeader from './SectionHeader'
 import SystemInfo from './SystemInfo'
 
 export interface Task {
@@ -175,26 +176,9 @@ const InstantTaskSortScreen = () => {
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
-        <div className="mb-8 text-center">
-          <div className="mb-4 text-green-300">
-            ════════════════════════════════════════════════════════════════
-          </div>
-          <div className="mb-2 text-green-300 text-xl tracking-wider">
-            ╔══════════════════════════════════════════════════════════╗
-          </div>
-          <div className="mb-2 text-green-300 text-xl tracking-wider">
-            ║ INSTANT TASK SORT ║
-          </div>
-          <div className="mb-4 text-green-300 text-xl tracking-wider">
-            ╚══════════════════════════════════════════════════════════╝
-          </div>
-          <div className="mb-4 text-green-500 text-sm">
-            TASKS AUTO-SORTED FOR YOUR CURRENT ENERGY STATE
-          </div>
-          <div className="text-green-300">
-            ════════════════════════════════════════════════════════════════
-          </div>
-        </div>
+        <SectionHeader title="INSTANT TASK SORT">
+          TASKS AUTO-SORTED FOR YOUR CURRENT ENERGY STATE
+        </SectionHeader>
 
         {/* Current Energy Status */}
         <div className="mx-auto mb-8 max-w-4xl">

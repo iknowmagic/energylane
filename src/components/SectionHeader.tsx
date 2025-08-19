@@ -1,9 +1,9 @@
 export default function MainHeader({
   title,
-  description,
+  children,
 }: {
   title: string
-  description: string
+  children: React.ReactNode
 }) {
   return (
     <div className="mb-8 text-center">
@@ -19,9 +19,7 @@ export default function MainHeader({
       <div className="mb-4 text-green-300 text-xl tracking-wider">
         ╚══════════════════════════════════════════════════════════╝
       </div>
-      <div className="mb-4 text-green-500 text-sm">
-        {description.toUpperCase()}
-      </div>
+      <div className="mb-4 text-green-500 text-sm">{children}</div>
       <div className="text-green-300">
         ════════════════════════════════════════════════════════════════
       </div>

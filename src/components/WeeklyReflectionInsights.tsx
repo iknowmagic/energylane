@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SectionHeader from './SectionHeader'
 import SystemInfo from './SystemInfo'
 
 // Exported interfaces for type safety
@@ -112,29 +113,14 @@ const WeeklyInsightsScreen = () => {
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
-        <div className="mb-8 text-center">
-          <div className="mb-4 text-green-300">
-            ════════════════════════════════════════════════════════════════
-          </div>
-          <div className="mb-2 text-green-300 text-xl tracking-wider">
-            ╔══════════════════════════════════════════════════════════╗
-          </div>
-          <div className="mb-2 text-green-300 text-xl tracking-wider">
-            ║ WEEKLY REFLECTION & INSIGHTS ║
-          </div>
-          <div className="mb-4 text-green-300 text-xl tracking-wider">
-            ╚══════════════════════════════════════════════════════════╝
-          </div>
+        <SectionHeader title="WEEKLY REFLECTION & INSIGHTS">
           <div className="mb-2 text-green-500 text-sm">
             WEEK OF {currentWeek}
           </div>
           <div className="mb-4 text-green-500 text-xs">
             ANALYZE PATTERNS • IDENTIFY IMPROVEMENTS • PLAN AHEAD
           </div>
-          <div className="text-green-300">
-            ════════════════════════════════════════════════════════════════
-          </div>
-        </div>
+        </SectionHeader>
 
         {/* Weekly Overview Stats */}
         <div className="mx-auto mb-8 max-w-6xl">

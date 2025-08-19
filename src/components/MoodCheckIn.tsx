@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SectionHeader from './SectionHeader'
 import SystemInfo from './SystemInfo'
 
 export interface Mood {
@@ -112,26 +113,9 @@ const MoodCheckIn = () => {
         {/* Header */}
         <SystemInfo currentTime={currentTime} formatTime={formatTime} />
 
-        <div className="mb-8 text-center">
-          <div className="mb-4 text-green-300">
-            ════════════════════════════════════════════════════════════════
-          </div>
-          <div className="mb-2 text-green-300 text-xl tracking-wider">
-            ╔══════════════════════════════════════════════════════════╗
-          </div>
-          <div className="mb-2 text-green-300 text-xl tracking-wider">
-            ║ MOOD CHECK-IN ║
-          </div>
-          <div className="mb-4 text-green-300 text-xl tracking-wider">
-            ╚══════════════════════════════════════════════════════════╝
-          </div>
-          <div className="mb-4 text-green-500 text-sm">
-            SELECT YOUR CURRENT ENERGY STATE FOR OPTIMAL TASK MATCHING
-          </div>
-          <div className="text-green-300">
-            ════════════════════════════════════════════════════════════════
-          </div>
-        </div>
+        <SectionHeader title="MOOD CHECK-IN">
+          SELECT YOUR CURRENT ENERGY STATE FOR OPTIMAL TASK MATCHING
+        </SectionHeader>
 
         {/* Mood Selection Grid */}
         <div className="mx-auto mb-8 max-w-4xl">
