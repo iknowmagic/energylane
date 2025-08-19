@@ -4,7 +4,7 @@ export const Route = createFileRoute('/')({
   component: App,
 })
 
-import MoodTaskManager from '@/components/MoodTaskManager'
+import MoodTaskManager from '@/pages/MoodTaskManager'
 
 function App() {
   return <MoodTaskManager />

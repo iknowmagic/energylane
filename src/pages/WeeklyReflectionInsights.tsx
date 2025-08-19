@@ -1,8 +1,8 @@
 import { useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import Button from './Button'
-import SectionHeader from './SectionHeader'
-import SystemInfo from './SystemInfo'
+import Button from '../components/Button'
+import SectionHeader from '../components/SectionHeader'
+import SystemInfo from '../components/SystemInfo'
 
 // Exported interfaces for type safety
 export interface WeeklyData {

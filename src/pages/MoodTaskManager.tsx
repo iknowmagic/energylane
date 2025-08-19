@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import Hero from './Hero'
-import MainHeader from './MainHeader'
+import Hero from '../components/Hero'
+import MainHeader from '../components/MainHeader'
 
 const MoodTaskManager = () => {
   const [currentTime, setCurrentTime] = useState(new Date())
